@@ -27,6 +27,8 @@
   --color-danger: #d7191c;
 }
 
+
+
 @utility container {
   margin-inline: auto;
   padding-inline: 1rem;
@@ -36,6 +38,13 @@
   @media (width >= 1440px) {
     max-width: 1440px;
   }
+}
+@font-face {
+  font-family: 'Microsoft Sans Serif';
+  src: url('/public/micross.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @layer base {
@@ -79,17 +88,24 @@ button {
   background: var(--color-primary);
 }
 
+
 /********************* Google Translate  ************************************/
 
 /* Remove the banner at top of the page */
 body {
   top: 0 !important;
   position: static !important;
+  font-family: 'Microsoft Sans Serif', sans-serif;
+}
+
+.secondary-font {
+  font-family: 'Poppins', sans-serif;
 }
 
 body .skiptranslate {
   display: none !important;
 }
+
 
 .goog-te-banner-frame.skiptranslate {
   display: none !important;

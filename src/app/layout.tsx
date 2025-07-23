@@ -1,18 +1,20 @@
+//layout.tsx
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import NextAuthSessionProvider from "@/lib/NextAuthSessionProvider";
 import ReduxProvider from "@/redux/ReduxProvider";
 
-const roboto = Roboto({
+const poppins = Poppins({
   subsets: ["latin"],
   weight: ["100", "300", "400", "500", "700", "900"],
+  variable: "--font-poppins", // Add this line to use it as a CSS variable
 });
 
 export const metadata: Metadata = {
-  title: "Starter kit",
-  description: "starter kit for nextjs with redux and redux persist",
+  title: " Niky.MX",
+  description: "The leading real estate platform in Mexico",
 };
 
 export default function RootLayout({
@@ -22,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} antialiased`}>
+      <body className={`font-sans ${poppins.variable} antialiased`}>
         <Toaster position="bottom-right" richColors />
         <NextAuthSessionProvider>
           <ReduxProvider>{children}</ReduxProvider>
