@@ -2,6 +2,7 @@ import { ChevronDown, Heart } from 'lucide-react';
 import React from 'react'
 import { Button } from '../ui/button';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Navbar = () => {
   return (
@@ -15,9 +16,10 @@ const Navbar = () => {
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <a href="#" className="text-orange-500 font-medium">
+            <Link href="/buy">
               Buy
-            </a>
+            </Link>
+         
             <a href="#" className="text-gray-700 hover:text-gray-900">
               Rent
             </a>

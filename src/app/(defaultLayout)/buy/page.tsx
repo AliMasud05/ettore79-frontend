@@ -2,9 +2,7 @@ import PropertyCard from '@/components/property/PropertyCard';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Bath, Bed, Heart, MapPin, Search, Star, Users } from 'lucide-react';
-import Image from 'next/image';
-import React from 'react'
+import { MapPin, Search } from 'lucide-react';
 
 const Page = () => {
   return (
@@ -15,31 +13,37 @@ const Page = () => {
           <div className="flex items-center space-x-3">
             <div className="flex-1">
               <Input
-                placeholder="Address, neighborhood, city, ZIP"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                placeholder="Address, neighborhood, city, ZIP "
+                className="w-full px-4 py-5  border border-gray-300 rounded-lg"
               />
             </div>
             <Select defaultValue="for-sale">
-              <SelectTrigger className="w-32">
+              <SelectTrigger className="w-32 py-5">
                 <SelectValue placeholder="For Sale" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="for-sale">For Sale</SelectItem>
-                <SelectItem value="for-rent">For Rent</SelectItem>
+                <SelectItem className="text-base" value="for-sale">
+                  <span className="text-gray-500">For Sale</span>
+                </SelectItem>
+                <SelectItem className="text-base" value="for-rent">
+                  <span className="text-gray-500">For Rent</span>
+                </SelectItem>
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-24">
-                <SelectValue placeholder="Price" />
+              <SelectTrigger className="w-24 py-5">
+                <SelectValue className='placeholder:text-base' placeholder="Price" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="any">Any</SelectItem>
-                <SelectItem value="100k">$100K+</SelectItem>
-                <SelectItem value="200k">$200K+</SelectItem>
+                <SelectItem value="any"><span className="text-base">Any</span></SelectItem>
+                <SelectItem value="100k"><span className="text-base">$100K+</span></SelectItem>
+                <SelectItem value="200k"><span className="text-base">$200K+</span></SelectItem>
+                <SelectItem value="100k"> <span className="text-base">$100K+</span></SelectItem>
+                <SelectItem value="200k"> <span className="text-base">$200K+</span></SelectItem>
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-32">
+              <SelectTrigger className="w-32 py-5">
                 <SelectValue placeholder="Beds & Baths" />
               </SelectTrigger>
               <SelectContent>
@@ -49,7 +53,7 @@ const Page = () => {
               </SelectContent>
             </Select>
             <Select>
-              <SelectTrigger className="w-32">
+              <SelectTrigger className="w-32 py-5">
                 <SelectValue placeholder="Property type" />
               </SelectTrigger>
               <SelectContent>
@@ -58,7 +62,7 @@ const Page = () => {
                 <SelectItem value="condo">Condo</SelectItem>
               </SelectContent>
             </Select>
-            <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6">
+            <Button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-5">
               <Search className="w-4 h-4 mr-2" />
               Search
             </Button>
@@ -150,14 +154,14 @@ const Page = () => {
         <div className="w-1/2 overflow-y-auto bg-white">
           <div className="p-6">
             <div className="mb-6">
-              <h1 className="text-2xl font-bold text-blue-600 mb-2">
+              <h1 className="text-4xl secondary-font font-bold text-blue-600 mb-2">
                 Mexico Flintridge Real Estate & Homes For Buy
               </h1>
               <p className="text-gray-600">6 Results</p>
             </div>
 
             {/* Property Grid */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-4">
               {Array.from({ length: 6 }).map((_, index) => (
                 <div
                   key={index}
@@ -216,7 +220,7 @@ const Page = () => {
                       </div>
                     </div>
                   </div> */}
-                  <PropertyCard/>
+                  <PropertyCard />
                 </div>
               ))}
             </div>
