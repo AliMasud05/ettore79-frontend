@@ -23,9 +23,11 @@ const Navbar = () => {
             <a href="#" className="text-gray-700 hover:text-gray-900">
               Rent
             </a>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
+            <Link href="/agent">
+            
               Agents
-            </a>
+            </Link>
+       
             <a href="#" className="text-gray-700 hover:text-gray-900">
               Sell
             </a>

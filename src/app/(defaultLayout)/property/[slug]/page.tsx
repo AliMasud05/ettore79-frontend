@@ -371,7 +371,7 @@ export default function PropertyDetailPage() {
               Beautiful modern house with luxury finishes in the exclusive
               Polanco area. This property features spacious areas, contemporary
               design and the best amenities. Perfect for families seeking
-              comfort and elegance in one of the city's best locations.
+              comfort and elegance in one of the city&apos;s best locations.
             </p>
           </div>
 
@@ -462,8 +462,8 @@ export default function PropertyDetailPage() {
               </div>
               <p className="text-gray-700">
                 Molthy helped me find someone to cook a few meals when I was
-                overwhelmed. The support felt real. I'm so grateful for this
-                platform!
+                overwhelmed. The support felt real. I&lsquo;m so grateful for
+                this platform!
               </p>
             </div>
             <div className="review-item p-4">
