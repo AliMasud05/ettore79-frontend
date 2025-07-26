@@ -11,35 +11,30 @@ const Navbar = () => {
         <div className=" container mx-auto flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-2">
-          <Image src="/logo.png" alt="Logo" width={1000} height={1000} className="h-auto w-36" />
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={1000}
+              height={1000}
+              className="h-auto w-36"
+            />
           </div>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/buy">
-              Buy
-            </Link>
-         
+            <Link href="/buy">Buy</Link>
+
             <a href="#" className="text-gray-700 hover:text-gray-900">
               Rent
             </a>
-            <Link href="/agent">
-            
-              Agents
-            </Link>
-       
+            <Link href="/agent">Agents</Link>
+
             <a href="#" className="text-gray-700 hover:text-gray-900">
               Sell
             </a>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-              Mortgages
-            </a>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-              Pricing Plan
-            </a>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-              Contact
-            </a>
+            <Link href="/mortgages">Mortgages</Link>
+            <Link href="/pricing-plan">Pricing Plan</Link> 
+            <Link href="/contact">Contact</Link>      
           </nav>
 
           {/* Right Side Actions */}
