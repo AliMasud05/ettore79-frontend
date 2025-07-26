@@ -10,7 +10,18 @@ const Navbar = () => {
       <header className="border-b border-gray-200 px-4 py-3">
         <div className=" container mx-auto flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link href="/">
+            <div className="flex items-center space-x-2">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={1000}
+                height={1000}
+                className="h-auto w-36"
+              />
+            </div>
+          </Link>
+          {/* <div className="flex items-center space-x-2">
             <Image
               src="/logo.png"
               alt="Logo"
@@ -18,7 +29,7 @@ const Navbar = () => {
               height={1000}
               className="h-auto w-36"
             />
-          </div>
+          </div> */}
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">

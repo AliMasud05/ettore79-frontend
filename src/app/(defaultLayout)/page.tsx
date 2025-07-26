@@ -1,7 +1,11 @@
+import Banner from "@/components/home/Banner";
+import FeatureProperties from "@/components/home/Feature-properties";
+
 const HomePage = () => {
   return (
     <div>
-      <h1>Home Page</h1>
+      <Banner />
+      <FeatureProperties />
     </div>
   );
 };
