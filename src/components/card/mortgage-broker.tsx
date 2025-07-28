@@ -1,11 +1,10 @@
 "use client";
+import brokerImage from '@/assets/agent/agent.png';
 import { MapPin, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { Card, CardContent } from "../ui/card";
-import brokerImage from '@/assets/agent/agent.png'
 
 interface ProfileCardProps {
   name: string;

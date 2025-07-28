@@ -1,9 +1,8 @@
-import { ChevronDown, Heart, Menu, X } from "lucide-react";
-import React from "react";
-import { Button } from "../ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"; // Ensure this is imported
+import { ChevronDown, Heart, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"; // Ensure this is imported
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   return (
