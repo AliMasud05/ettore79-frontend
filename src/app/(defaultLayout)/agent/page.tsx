@@ -6,6 +6,9 @@ import agent3 from "@/assets/agent/Image (8).png";
 import { Search } from "lucide-react";
 import AgentCard from "@/components/card/agent-card";
 import { useState } from "react";
+import Image from "next/image";
+import agentImage from "@/assets/agent/Frame 1610068574.png";
+import { Button } from "@/components/ui/button";
 
 // JSON data for agents with category field
 const agentData = [
@@ -269,12 +272,14 @@ export default function AgentsPage() {
 
       {/* Agent Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
-        <div className="
+        <div
+          className="
         col-span-1 md:col-span-2 lg:col-span-3 
 
-        grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6">
+        grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6"
+        >
           {filteredAgents.length > 0 ? (
-            filteredAgents.map((agent, index) => (
+            filteredAgents.slice(0, 6).map((agent, index) => (
               <AgentCard
                 key={index}
                 name={agent.name}
@@ -285,7 +290,6 @@ export default function AgentsPage() {
                 priceRangeMax={agent.priceRangeMax}
                 salesCount={agent.salesCount}
                 imageUrl={agent.imageUrl}
-              
               />
             ))
           ) : (
@@ -296,8 +300,26 @@ export default function AgentsPage() {
             </div>
           )}
         </div>
-        <div className="col-span-1">
-{/* space for advertisements */}
+        <div className="col-span-1">{/* space for advertisements */}</div>
+      </div>
+      <div className=" my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 rounded-xl bg-white">
+        <div className="bg-[#FFE9DB] col-span-1 md:col-span-4 flex justify-center items-center flex-col gap-4">
+          <h2 className="text-[#3012F0] secondary-font font-bold text-4xl md:text-5xl ">
+            What is True Agent?
+          </h2>
+          <Button className="bg-[#3012F0] py-5  hover:bg-orange-600 text-white">
+            Know More
+          </Button>
+        </div>
+        <div className="col-span-1 md:col-span-2 bg-blue-500">
+          <Image
+            src={agentImage.src}
+            alt="Agent Image"
+            width={1000}
+            height={1000}
+            className="object-cover object-center"
+            priority
+          />
         </div>
       </div>
     </div>

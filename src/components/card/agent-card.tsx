@@ -28,7 +28,7 @@ export default function ProfileCard({
   return (
     
     <Link href={`/agent/${name}`} className="cursor-pointer">
-      <div className="w-auto h-[430px] relative bg-stone-100 shadow-lg border-0 rounded-lg overflow-hidden">
+      <div className="w-auto h-[440px] relative bg-stone-100 shadow-lg border-0 rounded-lg overflow-hidden">
         <div>
           <Image
             src={

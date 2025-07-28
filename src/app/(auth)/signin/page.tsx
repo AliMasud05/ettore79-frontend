@@ -79,14 +79,16 @@ export default function LoginPage() {
           <div className="flex flex-col justify-start gap-6 max-w-xl w-full px-4">
             {/* Logo */}
             <div className="logo-animation">
-              <Image
-                src={logo.src}
-                alt="Company logo"
-                width={216}
-                height={40}
-                className="h-auto w-54"
-                priority
-              />
+              <Link href="/">
+                <Image
+                  src={logo.src}
+                  alt="Company logo"
+                  width={216}
+                  height={40}
+                  className="h-auto w-54"
+                  priority
+                />
+              </Link>
             </div>
 
             {/* Form Container */}

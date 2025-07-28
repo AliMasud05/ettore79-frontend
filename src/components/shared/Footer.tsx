@@ -6,7 +6,7 @@ const Footer = () => {
     <div>
       <footer className="bg-gray-900 text-white py-12">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
             <div>
               <div className="flex items-center space-x-2 mb-4">
                
@@ -19,7 +19,7 @@ const Footer = () => {
 
             <div>
               <h3 className="font-semibold mb-4">Buy</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2 text-base text-gray-400">
                 <li>
                   <a href="#" className="hover:text-white">
                     Search Properties
@@ -40,7 +40,7 @@ const Footer = () => {
 
             <div>
               <h3 className="font-semibold mb-4">Sell</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2 text-base text-gray-400">
                 <li>
                   <a href="#" className="hover:text-white">
                     List Property
@@ -61,7 +61,7 @@ const Footer = () => {
 
             <div>
               <h3 className="font-semibold mb-4">Support</h3>
-              <ul className="space-y-2 text-sm text-gray-400">
+              <ul className="space-y-2 text-base text-gray-400">
                 <li>
                   <a href="#" className="hover:text-white">
                     Contact

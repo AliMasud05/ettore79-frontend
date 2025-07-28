@@ -50,6 +50,15 @@ export function PricingPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 py-16 px-4">
+      <div className="container mx-auto flex flex-col gap-3  mb-10">
+        <h1 className="secondary-font font-bold text-[#3012F0] text-4xl md:text-5xl ">
+          Simple, transparent pricing
+        </h1>
+        <p className="text-base text-gray-600 md:text-xl font-light" >
+          We believe Untitled should be accessible to all companies, no matter
+          the size.
+        </p>
+      </div>
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           {plans.map((plan, index) => (
@@ -98,7 +107,7 @@ export function PricingPage() {
                         <div className="flex-shrink-0 mt-0.5">
                           <Check className="w-4 h-4 text-blue-600" />
                         </div>
-                        <span className="text-sm text-gray-700 leading-relaxed">
+                        <span className="text-base text-gray-700 leading-relaxed">
                           {feature}
                         </span>
                       </div>
@@ -107,7 +116,7 @@ export function PricingPage() {
 
                   {/* Get Started Button */}
                   <Button
-                    className={`w-full py-3 font-medium ${
+                    className={`w-full py-6 font-medium ${
                       plan.buttonStyle === "orange"
                         ? "bg-orange-500 hover:bg-orange-600 text-white"
                         : "bg-gray-900 hover:bg-gray-800 text-white"
