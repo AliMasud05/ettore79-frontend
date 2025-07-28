@@ -34,10 +34,12 @@ const Banner = () => {
 
         <div className="relative z-10 px-6 py-20">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="md:text-5xl secondary-font text-4xl font-bold text-gray-900 mb-6">
               The New Era of Real Estate has Arrived in Mexico
             </h1>
-            <p className="text-lg text-gray-700 mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-center text-black/80
+            mb-12 font-normal 
+            max-w-3xl mx-auto">
               We connect buyers, sellers, tenants and professionals in one
               comprehensive digital platform
             </p>
@@ -52,9 +54,6 @@ const Banner = () => {
                 <button className="px-6 py-2 text-gray-600 hover:text-gray-900">
                   Buy
                 </button>
-                <button className="px-6 py-2 text-gray-600 hover:text-gray-900">
-                  Sell
-                </button>
               </div>
 
               {/* Search Fields */}
@@ -67,7 +66,8 @@ const Banner = () => {
                 </div>
                 <div className="md:col-span-1">
                   <Select>
-                    <SelectTrigger className="h-12 border-gray-300">
+                    <SelectTrigger className="h-12 border-gray-300 px-4 py-6">
+                
                       <SelectValue placeholder="$500-$5000" />
                     </SelectTrigger>
                     <SelectContent>
@@ -79,7 +79,7 @@ const Banner = () => {
                 </div>
                 <div className="md:col-span-1">
                   <Select>
-                    <SelectTrigger className="h-12 border-gray-300">
+                    <SelectTrigger className="h-12 border-gray-300 px-4 py-6">
                       <SelectValue placeholder="Property Type" />
                     </SelectTrigger>
                     <SelectContent>

@@ -47,7 +47,7 @@ export default function BlogDetailPage() {
         <div className="prose  mb-12 max-w-7xl">
           <p
             className="text-gray-700  mb-6
-           text-base font-normal leading-7 text-justify tracking-wide"
+           text-base font-normal leading-7 text-justify "
           >
             In today’s visually driven world, first impressions are
             everything—especially when it comes to real estate. Professional
@@ -60,7 +60,7 @@ export default function BlogDetailPage() {
             spaces, and the overall lifestyle that the property offers.
           </p>
 
-          <p className="text-gray-700 leading-7 tracking-wide text-justify">
+          <p className="text-gray-700 leading-7  text-justify">
             Whether it’s a cozy urban apartment, a spacious family home, a
             luxury villa, or a rental property on Airbnb, we tailor each
             photoshoot to match the style, mood, and purpose of your space. Our
@@ -71,6 +71,20 @@ export default function BlogDetailPage() {
             landscaping, and neighborhood surroundings, as well as twilight
             photography for those magical evening shots that add sophistication
             and charm.
+          </p>
+          <p
+            className="text-gray-700  my-6
+           text-base font-normal leading-7 text-justify "
+          >
+            In today’s visually driven world, first impressions are
+            everything—especially when it comes to real estate. Professional
+            property photography goes beyond just taking pictures; it’s about
+            telling the story of a space. We offer high-end photography services
+            that are meticulously crafted to highlight your property&apos;s
+            unique character, atmosphere, and value. From the moment a potential
+            buyer or guest views your listing, our images create an emotional
+            connection by showcasing clean lines, natural lighting, functional
+            spaces, and the overall lifestyle that the property offers.
           </p>
         </div>
 

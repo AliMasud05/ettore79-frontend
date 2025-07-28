@@ -1,11 +1,14 @@
 "use client";
-import BlogCard from "@/components/card/BlogCard";
-import { Input } from "@/components/ui/input";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import blog1 from "@/assets/blog/blog1.png";
 import blog2 from "@/assets/blog/blog2.png";
 import blog3 from "@/assets/blog/blog3.png";
+import BlogCard from "@/components/card/BlogCard";
+import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
+import { useState } from "react";
+
+// Tab type for allowed tab names
+type TabType = "agents" | "landlords" | "professional" | "buyer";
 
 // JSON data for blog posts
 const blogData = {
@@ -188,53 +191,63 @@ const blogData = {
 };
 
 export default function ResourcesPage() {
+  const [activeTab, setActiveTab] = useState<TabType>("agents");
+
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl secondary-font font-bold text-purple-700 mb-2">
+      <h1 className="text-5xl secondary-font font-bold text-[#3012F0] mb-2">
         Resources and insights
       </h1>
-      <p className="text-gray-600 mb-8 font-normal">
+      <p className="text-[#4B5563] mb-8 text-base font-normal">
         The latest industry news, interviews, technologies, and resources.
       </p>
 
       <div className="flex flex-wrap gap-4 mb-8">
-        <Tabs defaultValue="agents" className="w-full  ">
+        <div className="w-full">
           <div className="flex gap-6 items-center">
-            <TabsList className="py-5 rounded-md flex bg-white">
-              <TabsTrigger
-                value="agents"
-                className="rounded-md border-2 border-gray-300 
-     text-base text-[#717680] font-medium
-     data-[state=active]:bg-[#F4EEEB] data-[state=active]:text-blue-600 py-5"
+            <div className="flex bg-white rounded-md  border border-gray-300">
+              <button
+                onClick={() => setActiveTab("agents")}
+                className={`px-4  text-base 
+                  font-medium transition-colors border-r-2 border-gray-300 ${
+                    activeTab === "agents"
+                      ? "bg-[#F4EEEB] text-blue-600"
+                      : "text-[#717680]"
+                  }`}
               >
                 Agents
-              </TabsTrigger>
-              <TabsTrigger
-                value="landlords"
-                className="rounded-md border-2 border-gray-300 bg-white
-     text-base text-[#717680] font-medium
-     data-[state=active]:bg-[#F4EEEB] data-[state=active]:text-blue-600 py-5"
+              </button>
+              <button
+                onClick={() => setActiveTab("landlords")}
+                className={`px-4 py-2  text-base font-medium transition-colors border-r-2 border-gray-300 ${
+                  activeTab === "landlords"
+                    ? "bg-[#F4EEEB] text-blue-600"
+                    : "text-[#717680]"
+                }`}
               >
                 Landlords
-              </TabsTrigger>
-              <TabsTrigger
-                value="professional"
-                className="rounded-md border-2 border-gray-300 bg-white
-     text-base text-[#717680] font-medium
-     data-[state=active]:bg-[#F4EEEB] data-[state=active]:text-blue-600 py-5"
+              </button>
+              <button
+                onClick={() => setActiveTab("professional")}
+                className={`px-4 py-2  text-base font-medium transition-colors border-r-2 border-gray-300 ${
+                  activeTab === "professional"
+                    ? "bg-[#F4EEEB] text-blue-600"
+                    : "text-[#717680]"
+                }`}
               >
                 Professional
-              </TabsTrigger>
-              <TabsTrigger
-                value="buyer"
-                className="rounded-md border-2 border-gray-300 bg-white
-     text-base text-[#717680] font-medium
-     data-[state=active]:bg-[#F4EEEB] data-[state=active]:text-blue-600 py-5"
+              </button>
+              <button
+                onClick={() => setActiveTab("buyer")}
+                className={`px-4 py-2 text-base font-medium transition-colors ${
+                  activeTab === "buyer"
+                    ? "bg-[#F4EEEB] text-blue-600"
+                    : "text-[#717680]"
+                }`}
               >
                 Buyer
-              </TabsTrigger>
-            </TabsList>
-
+              </button>
+            </div>
             <div className="relative">
               <Search
                 color="black"
@@ -248,66 +261,68 @@ export default function ResourcesPage() {
             </div>
           </div>
 
-          <TabsContent value="agents" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {blogData.agents.map((post, index) => (
-                <BlogCard
-                  key={index}
-                  title={post.title}
-                  description={post.description}
-                  imageUrl={post.imageUrl}
-                  author={post.author}
-                  date={post.date}
-                />
-              ))}
-            </div>
-          </TabsContent>
+          <div className="mt-6">
+            {activeTab === "agents" && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {blogData.agents.map((post, index) => (
+                  <BlogCard
+                    key={index}
+                    title={post.title}
+                    description={post.description}
+                    imageUrl={post.imageUrl}
+                    author={post.author}
+                    date={post.date}
+                  />
+                ))}
+              </div>
+            )}
 
-          <TabsContent value="landlords" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {blogData.landlords.map((post, index) => (
-                <BlogCard
-                  key={index}
-                  title={post.title}
-                  description={post.description}
-                  imageUrl={post.imageUrl}
-                  author={post.author}
-                  date={post.date}
-                />
-              ))}
-            </div>
-          </TabsContent>
+            {activeTab === "landlords" && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {blogData.landlords.map((post, index) => (
+                  <BlogCard
+                    key={index}
+                    title={post.title}
+                    description={post.description}
+                    imageUrl={post.imageUrl}
+                    author={post.author}
+                    date={post.date}
+                  />
+                ))}
+              </div>
+            )}
 
-          <TabsContent value="professional" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {blogData.professional.map((post, index) => (
-                <BlogCard
-                  key={index}
-                  title={post.title}
-                  description={post.description}
-                  imageUrl={post.imageUrl}
-                  author={post.author}
-                  date={post.date}
-                />
-              ))}
-            </div>
-          </TabsContent>
+            {activeTab === "professional" && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {blogData.professional.map((post, index) => (
+                  <BlogCard
+                    key={index}
+                    title={post.title}
+                    description={post.description}
+                    imageUrl={post.imageUrl}
+                    author={post.author}
+                    date={post.date}
+                  />
+                ))}
+              </div>
+            )}
 
-          <TabsContent value="buyer" className="mt-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {blogData.buyer.map((post, index) => (
-                <BlogCard
-                  key={index}
-                  title={post.title}
-                  description={post.description}
-                  imageUrl={post.imageUrl}
-                  author={post.author}
-                  date={post.date}
-                />
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
+            {activeTab === "buyer" && (
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {blogData.buyer.map((post, index) => (
+                  <BlogCard
+                    key={index}
+                    title={post.title}
+                    description={post.description}
+                    imageUrl={post.imageUrl}
+                    author={post.author}
+                    date={post.date}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

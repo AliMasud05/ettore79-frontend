@@ -4,9 +4,9 @@ import PropertyCard from '../property/PropertyCard';
 const FeatureProperties = () => {
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className='text-center'>
-        <h1 className='secondary-font font-bold text-4xl mb-4  text-[#]'>Featured Properties</h1>
-        <p>
+      <div className='text-center flex flex-col gap-2 mb-10'>
+        <h1 className='secondary-font font-bold text-3xl md:text-[44px] '>Featured Properties</h1>
+        <p className='text-base'>
           Discover the best properties available in Mexico&apos;s most popular
           areas
         </p>

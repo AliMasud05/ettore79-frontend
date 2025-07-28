@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 
+import profile from "@/assets/agent/Image (8).png";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -11,11 +12,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Card } from "@/components/ui/card";
-import { Star } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
-import profile from "@/assets/agent/Image (8).png";
+import MortgageBrokerCard from "../card/mortgage-broker";
 
 
 interface BrokerFilters {
@@ -62,10 +60,10 @@ export function BrokersDirectoryPage() {
         <div className="max-w-7xl mx-auto">
           {/* Page Header */}
           <div className="mb-12">
-            <h1 className="text-4xl font-bold text-blue-600 mb-4">
+            <h1 className="text-5xl font-bold secondary-font text-blue-600 mb-4">
               Mortgage Brokers Directory
             </h1>
-            <p className="text-gray-600 text-lg max-w-3xl">
+            <p className="text-gray-600 text-base max-w-3xl">
               Connect with certified mortgage professionals who can help you
               secure the best financing for your property purchase.
             </p>
@@ -186,12 +184,12 @@ export function BrokersDirectoryPage() {
           </div>
 
           {/* Brokers Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             {brokers.map((broker) => (
               <Link href={`/mortgages-broker/${broker.id}`} key={broker.id}>
-                <Card
+                {/* <Card
                  
-                  className="p-6 hover:shadow-lg transition-shadow"
+                  className="p-6 hover:shadow-lg "
                 >
                   <div className="text-center mb-4">
                     <div className="relative w-24 h-24 mx-auto mb-4">
@@ -256,7 +254,15 @@ export function BrokersDirectoryPage() {
                       </Button>
                     </div>
                   </div>
-                </Card>
+                </Card> */}
+
+<MortgageBrokerCard
+ name="Carlos Mendoza" 
+ company="MortgagePro Mexico"
+ rating={4.9} reviewCount={156} 
+ priceRangeMin="$13K"
+  priceRangeMax="$3.8M" salesCount={526} imageUrl={profile.src} />
+
               </Link>
             ))}
           </div>

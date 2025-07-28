@@ -11,33 +11,33 @@ export default function AgentDetailPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div>
-        <div className="grid grid-cols-1 lg:grid-cols-8 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-9 gap-8">
           {/* Agent Profile */}
           <div className=" p-6 mb-8 col-span-2 max-h-72 mt-0 md:mt-20">
             <div className="text-center mb-6">
-              <div className="w-24 h-24 rounded-full bg-gray-200 mx-auto mb-4 overflow-hidden">
+              <div className="w-30 h-30 rounded-full bg-gray-200 mx-auto mb-4 overflow-hidden">
                 <Image
                   src={profile.src}
                   alt="Olivia Rhye"
-                  width={96}
-                  height={96}
+                  width={120}
+                  height={120}
                   className="object-cover"
                 />
               </div>
-              <h2 className="text-xl font-bold text-purple-700 mb-1">
+              <h2 className="text-4xl font-normal text-[#3012F0] mb-1">
                 Olivia Rhye
               </h2>
               <div className="flex items-center justify-center mb-2">
                 <Star className="h-4 w-4 text-yellow-400 fill-yellow-400" />
                 <span className="text-sm ml-1">4.9 (127 reviews)</span>
               </div>
-              <div className="text-sm text-gray-600 space-y-1">
+              <div className="text-base text-gray-600 space-y-1">
                 <p>$13K-$3.8M price range</p>
                 <p>526 Sales last 12 months</p>
               </div>
             </div>
           </div>
-          <div className="mb-8 col-span-6">
+          <div className="mb-8 col-span-7">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-purple-700">
                 Recent Sales
@@ -52,7 +52,7 @@ export default function AgentDetailPage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
               {Array.from({ length: 3 }).map((_, index) => (
                 <PropertyCard key={index} />
               ))}
@@ -64,7 +64,7 @@ export default function AgentDetailPage() {
             {/* Recent Sales Section */}
 
             {/* Description */}
-            <div className="mb-8">
+            <div className="mb-8 border-1 border-gray-300 rounded-lg p-3">
               <h3 className="text-xl font-bold mb-4">Description</h3>
               <p className="text-gray-700 leading-relaxed">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -170,13 +170,13 @@ export default function AgentDetailPage() {
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       First name
                     </label>
-                    <Input placeholder="First name" />
+                    <Input placeholder="First name" className="py-6 " />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
                       Last name
                     </label>
-                    <Input placeholder="Last name" />
+                    <Input placeholder="Last name" className="py-6 " />
                   </div>
                 </div>
 
@@ -184,7 +184,11 @@ export default function AgentDetailPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Email
                   </label>
-                  <Input type="email" placeholder="you@company.com" />
+                  <Input
+                    type="email"
+                    placeholder="you@company.com"
+                    className="py-6 "
+                  />
                 </div>
 
                 <div>
@@ -199,7 +203,7 @@ export default function AgentDetailPage() {
                     </select>
                     <Input
                       placeholder="+1 (555) 000-0000"
-                      className="rounded-l-none"
+                      className="rounded-l-none py-6"
                     />
                   </div>
                 </div>
@@ -213,19 +217,21 @@ export default function AgentDetailPage() {
 
                 <div className="flex items-center">
                   <input type="checkbox" id="privacy" className="mr-2" />
-                  <label htmlFor="privacy" className="text-xs text-gray-600">
+                  <label htmlFor="privacy" className="text-sm text-gray-600">
                     You agree to our friendly privacy policy.
                   </label>
                 </div>
 
-                <Button className="w-full bg-orange-500 hover:bg-orange-600">
+                <Button className="w-full  bg-orange-500 hover:bg-orange-600 py-6">
                   Send message
                 </Button>
 
                 <div className="flex justify-center">
                   <Button
                     variant="outline"
-                    className="w-full flex items-center justify-center gap-2 bg-transparent"
+                    className="w-full flex items-center justify-center
+                    py-6
+                    gap-2 bg-transparent"
                   >
                     <svg
                       className="h-5 w-5 text-green-600"

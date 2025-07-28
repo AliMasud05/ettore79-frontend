@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useState } from "react";
 import profile from "@/assets/agent/Image (8).png";
 import mortgages from "@/assets/banner/mortgages.png";
+import svgImg from '@/assets/home/Component 1 (1).svg'
 
 
 interface MortgageData {
@@ -124,9 +125,12 @@ export function MortgagePage() {
           priority
         />
         <div className="absolute inset-0 bg-opacity-40" />
-        <div className="relative z-10 flex items-center justify-center h-full text-center text-white px-4">
+        <div
+          className="relative z-10 flex items-center justify-center h-full
+         text-center text-black px-4"
+        >
           <div className="container mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-5xl md:text-5xl font-bold econdary-font mb-4">
               Get Your Dream Home Mortgage
             </h1>
             <p className="text-xl mb-8">
@@ -134,12 +138,16 @@ export function MortgagePage() {
               minutes
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3">
+              <Button
+                className="bg-orange-500 hover:bg-orange-600
+               text-white px-8 py-6 text-sm"
+              >
                 Calculate Mortgage
               </Button>
               <Button
                 variant="outline"
-                className="bg-white text-gray-900 hover:bg-gray-100 px-8 py-3"
+                className="bg-white text-gray-900 font-medium
+                 hover:bg-gray-100 px-8  py-6 text-sm"
               >
                 Find Mortgage Broker
               </Button>
@@ -150,7 +158,7 @@ export function MortgagePage() {
 
       {/* Main Content */}
       <section className="py-16 px-4">
-        <div className="max-w-7xl mx-auto">
+        <div className="container mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Left Side - Mortgage Calculator */}
             <div>
@@ -293,11 +301,37 @@ export function MortgagePage() {
                     </div>
                   </Card>
 
-                  <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3">
+                  <Button
+                    className="w-full bg-orange-500 hover:bg-orange-600
+                   text-white py-6"
+                  >
                     Get Pre-Approved Now
                   </Button>
                 </div>
               </Card>
+              {/* Statistics */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
+                <div
+                  className="text-center border-1 border-gray-300
+             rounded-lg p-8"
+                >
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <TrendingUp className="w-6 h-6 text-orange-500" />
+                    <span className="text-3xl font-bold">8.5%</span>
+                  </div>
+                  <p className="text-gray-600">Avg. Interest Rate</p>
+                </div>
+                <div
+                  className="text-center border-1 border-gray-300
+             rounded-lg p-8"
+                >
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    <Clock className="w-6 h-6 text-orange-500" />
+                    <span className="text-3xl font-bold">15 days</span>
+                  </div>
+                  <p className="text-gray-600">Avg. Approval Time</p>
+                </div>
+              </div>
             </div>
 
             {/* Right Side - Featured Brokers */}
@@ -306,9 +340,7 @@ export function MortgagePage() {
                 <div className="w-6 h-6 bg-orange-500 rounded flex items-center justify-center">
                   <span className="text-white text-sm">👥</span>
                 </div>
-                <h2 className="text-xl font-semibold">
-                  Featured Mortgage Brokers
-                </h2>
+                <h2 className="text-2xl ">Featured Mortgage Brokers</h2>
               </div>
               <p className="text-gray-600 mb-8">
                 Connect with certified professionals in your area
@@ -318,13 +350,15 @@ export function MortgagePage() {
                 {brokers.map((broker) => (
                   <Card key={broker.id} className="p-6">
                     <div className="flex items-start gap-4">
-                      <Image
-                        src={profile.src}
-                        alt="Agent"
-                        width={50}
-                        height={50}
-                        className="rounded-full"
-                      />
+                      <div className="w-16 h-16 rounded-full bg-gray-200 overflow-hidden">
+                        <Image
+                          src={profile.src}
+                          alt="Agent"
+                          width={1000}
+                          height={1000}
+                          className="rounded-full"
+                        />
+                      </div>
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-1">
                           <h3 className="font-semibold">{broker.name}</h3>
@@ -358,7 +392,7 @@ export function MortgagePage() {
                           ))}
                         </div>
                         <div className="flex gap-3">
-                          <Button className="bg-orange-500 hover:bg-orange-600 text-white text-sm px-4 py-2">
+                          <Button className="bg-[#FF924D] hover:bg-orange-600 text-white text-sm px-4 py-2">
                             View Profile
                           </Button>
                           <Button
@@ -383,7 +417,13 @@ export function MortgagePage() {
               {/* Pre-Approval Section */}
               <Card className="mt-8 p-6 text-center">
                 <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-2xl">🏠</span>
+                  <Image
+                    src={svgImg.src}
+                    alt="Mortgage"
+                    width={500}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <h3 className="text-xl font-semibold mb-2">
                   Get Pre-Approved Today
@@ -391,48 +431,32 @@ export function MortgagePage() {
                 <p className="text-gray-600 mb-6">
                   Strengthen your offer and show sellers you&apos;re serious
                 </p>
-                <Button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3">
+                <Button
+                  className="bg-orange-500 hover:bg-orange-600
+                 text-white px-8 py-6"
+                >
                   Start Pre-Approval
                 </Button>
               </Card>
-            </div>
-          </div>
-
-          {/* Statistics */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <TrendingUp className="w-6 h-6 text-orange-500" />
-                <span className="text-3xl font-bold">8.5%</span>
-              </div>
-              <p className="text-gray-600">Avg. Interest Rate</p>
-            </div>
-            <div className="text-center">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <Clock className="w-6 h-6 text-orange-500" />
-                <span className="text-3xl font-bold">15 days</span>
-              </div>
-              <p className="text-gray-600">Avg. Approval Time</p>
-            </div>
-          </div>
-
-          {/* Loan Options */}
-          <div className="mt-16">
-            <h2 className="text-2xl font-bold text-center mb-8">
-              Discover your loan options
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {loanOptions.map((option, index) => (
-                <div key={index} className="flex items-start gap-3 p-4">
-                  {option.icon}
-                  <div>
-                    <h3 className="font-semibold mb-1">{option.title}</h3>
-                    <p className="text-gray-600 text-sm">
-                      {option.description}
-                    </p>
-                  </div>
+              {/* Loan Options */}
+              <div className="mt-16">
+                <h2 className="text-2xl font-normal mb-8">
+                  Discover your loan options
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {loanOptions.map((option, index) => (
+                    <div key={index} className="flex items-start gap-3 p-4">
+                      {option.icon}
+                      <div>
+                        <h3 className="font-semibold mb-1">{option.title}</h3>
+                        <p className="text-gray-600 text-sm">
+                          {option.description}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>
