@@ -79,6 +79,7 @@ export default function SignUpPage() {
           <div className="flex flex-col justify-start gap-2 max-w-xl w-full px-4">
             {/* Logo */}
             <div className="logo-animation">
+               <Link href="/">
               <Image
                 src={logo.src}
                 alt="Company logo"
@@ -86,7 +87,8 @@ export default function SignUpPage() {
                 height={40}
                 className="h-auto w-54"
                 priority
-              />
+                />
+                </Link>
             </div>
 
             {/* Form Container */}

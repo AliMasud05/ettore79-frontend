@@ -5,7 +5,7 @@ import Review from "@/components/home/Review";
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="overflow-hidden">
       <Banner />
       <FeatureProperties />
       <HomeDiscription/>

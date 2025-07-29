@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import Link from "next/link";
 import MortgageBrokerCard from "../card/mortgage-broker";
+import { Search } from "lucide-react";
 
 
 interface BrokerFilters {
@@ -21,15 +22,17 @@ interface BrokerFilters {
   loanTerm: string;
   purchasePrice: string;
   downPayment: string;
+  downPaymentPercent: string;
   location: string;
 }
 
-export function BrokersDirectoryPage() {
+export default function Brokers() {
   const [filters, setFilters] = useState<BrokerFilters>({
     loanType: "Purchase",
     loanTerm: "30 Year Fixed",
     purchasePrice: "1245.56",
     downPayment: "4699",
+    downPaymentPercent: "40%",
     location: "Los Angeles CA",
   });
 
@@ -70,115 +73,143 @@ export function BrokersDirectoryPage() {
           </div>
 
           {/* Search Filters */}
-          <div className="bg-gray-50 p-6 rounded-lg mb-12">
-            <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Loan Type
-                </label>
-                <div className="flex gap-2">
-                  <Button
-                    variant={
-                      filters.loanType === "Purchase" ? "default" : "outline"
-                    }
-                    size="sm"
-                    onClick={() => handleFilterChange("loanType", "Purchase")}
-                    className={
-                      filters.loanType === "Purchase"
-                        ? "bg-gray-900 text-white"
-                        : "bg-white text-gray-700 border-gray-300"
+          <div className="w-full ">
+            <div className="bg-white  rounded-lg py-4">
+              <div className="grid grid-cols-1 md:grid-cols-6 gap-4 items-end">
+                {/* Loan Type */}
+                <div className="">
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Loan Type
+                  </label>
+                  <div className="flex border border-gray-300 rounded  w-[200px]">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleFilterChange("loanType", "Purchase")}
+                      className={`flex-1 rounded-none h-12 ${
+                        filters.loanType === "Purchase"
+                          ? "bg-gray-900 text-white hover:bg-gray-800"
+                          : "bg-white text-gray-700 hover:bg-gray-50"
+                      }`}
+                    >
+                      Purchase
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() =>
+                        handleFilterChange("loanType", "Refinance")
+                      }
+                      className={`flex-1 rounded-none h-12  border-gray-300 ${
+                        filters.loanType === "Refinance"
+                          ? "bg-gray-900 text-white hover:bg-gray-800"
+                          : "bg-white text-gray-700 hover:bg-gray-50"
+                      }`}
+                    >
+                      Refinance
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Loan Term */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Loan Term
+                  </label>
+                  <Select
+                    value={filters.loanTerm}
+                  
+                    onValueChange={(value) =>
+                      handleFilterChange("loanTerm", value)
                     }
                   >
-                    Purchase
-                  </Button>
+                    <SelectTrigger className="bg-white border-gray-300 py-6">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="15 Year Fixed">
+                        15 Year Fixed
+                      </SelectItem>
+                      <SelectItem value="30 Year Fixed">
+                        30 Year Fixed
+                      </SelectItem>
+                      <SelectItem value="5/1 ARM">5/1 ARM</SelectItem>
+                      <SelectItem value="7/1 ARM">7/1 ARM</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Purchase Price */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Purchase Price
+                  </label>
+                  <div className="relative">
+                    <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                      $
+                    </span>
+                    <Input
+                      value={filters.purchasePrice}
+                      onChange={(e) =>
+                        handleFilterChange("purchasePrice", e.target.value)
+                      }
+                      className="bg-white border-gray-300 pl-7 py-6"
+                    />
+                  </div>
+                </div>
+
+                {/* Down Payment */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Down Payment
+                  </label>
+                  <div className="flex gap-2">
+                    <div className="relative flex-1">
+                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                        $
+                      </span>
+                      <Input
+                        value={filters.downPayment}
+                        onChange={(e) =>
+                          handleFilterChange("downPayment", e.target.value)
+                        }
+                        className="bg-white border-gray-300 pl-7 py-6"
+                      />
+                    </div>
+                    <Input
+                      value={filters.downPaymentPercent}
+                      onChange={(e) =>
+                        handleFilterChange("downPaymentPercent", e.target.value)
+                      }
+                      className="bg-white border-gray-300 w-16 py-6"
+                    />
+                  </div>
+                </div>
+
+                {/* Location */}
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Location
+                  </label>
+                  <Input
+                    value={filters.location}
+                    onChange={(e) =>
+                      handleFilterChange("location", e.target.value)
+                    }
+                    className="bg-white border-gray-300 py-6"
+                  />
+                </div>
+
+                {/* Search Button */}
+                <div>
                   <Button
-                    variant={
-                      filters.loanType === "Refinance" ? "default" : "outline"
-                    }
-                    size="sm"
-                    onClick={() => handleFilterChange("loanType", "Refinance")}
-                    className={
-                      filters.loanType === "Refinance"
-                        ? "bg-gray-900 text-white"
-                        : "bg-white text-gray-700 border-gray-300"
-                    }
+                    onClick={handleSearch}
+                    className="w-full text-base bg-orange-500 py-6 hover:bg-orange-600 text-white"
                   >
-                    Refinance
+                    <Search className="w-4 h-4 mr-2 " />
+                    Search
                   </Button>
                 </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Loan Term
-                </label>
-                <Select
-                  value={filters.loanTerm}
-                  onValueChange={(value) =>
-                    handleFilterChange("loanTerm", value)
-                  }
-                >
-                  <SelectTrigger className="bg-white">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="15 Year Fixed">15 Year Fixed</SelectItem>
-                    <SelectItem value="30 Year Fixed">30 Year Fixed</SelectItem>
-                    <SelectItem value="5/1 ARM">5/1 ARM</SelectItem>
-                    <SelectItem value="7/1 ARM">7/1 ARM</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Purchase Price
-                </label>
-                <Input
-                  value={filters.purchasePrice}
-                  onChange={(e) =>
-                    handleFilterChange("purchasePrice", e.target.value)
-                  }
-                  placeholder="$ 1245.56"
-                  className="bg-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Down Payment
-                </label>
-                <Input
-                  value={filters.downPayment}
-                  onChange={(e) =>
-                    handleFilterChange("downPayment", e.target.value)
-                  }
-                  placeholder="$ 4699"
-                  className="bg-white"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Location
-                </label>
-                <Input
-                  value={filters.location}
-                  onChange={(e) =>
-                    handleFilterChange("location", e.target.value)
-                  }
-                  placeholder="Los Angeles CA"
-                  className="bg-white"
-                />
-              </div>
-
-              <div>
-                <Button
-                  onClick={handleSearch}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white"
-                >
-                  Search
-                </Button>
               </div>
             </div>
           </div>
@@ -187,82 +218,16 @@ export function BrokersDirectoryPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
             {brokers.map((broker) => (
               <Link href={`/mortgages-broker/${broker.id}`} key={broker.id}>
-                {/* <Card
-                 
-                  className="p-6 hover:shadow-lg "
-                >
-                  <div className="text-center mb-4">
-                    <div className="relative w-24 h-24 mx-auto mb-4">
-                      <Image
-                        src={profile.src}
-                        alt={broker.name}
-                        fill
-                        className="rounded-full object-cover"
-                      />
-                    </div>
-                    <div className="flex items-center justify-center gap-2 mb-1">
-                      <h3 className="font-semibold text-lg">{broker.name}</h3>
-                      {broker.verified && (
-                        <span className="text-blue-500 text-sm">✓</span>
-                      )}
-                    </div>
-                    <p className="text-gray-600 text-sm mb-2">
-                      {broker.company}
-                    </p>
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                        <span className="text-sm font-medium">
-                          {broker.rating}
-                        </span>
-                        <span className="text-sm text-gray-600">
-                          ({broker.reviews})
-                        </span>
-                      </div>
-                      <span className="text-sm text-gray-600">
-                        {broker.experience} years
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600 mb-4">
-                      📍 {broker.location}
-                    </p>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div className="flex flex-wrap gap-2 justify-center">
-                      {broker.specialties.map((specialty, index) => (
-                        <span
-                          key={index}
-                          className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
-                        >
-                          {specialty}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex gap-2">
-                      <Link href={`/brokers/${broker.id}`} className="flex-1">
-                        <Button className="w-full bg-orange-500 hover:bg-orange-600 text-white text-sm">
-                          View Profile
-                        </Button>
-                      </Link>
-                      <Button
-                        variant="outline"
-                        className="flex-1 text-sm bg-transparent"
-                      >
-                        Bank Details
-                      </Button>
-                    </div>
-                  </div>
-                </Card> */}
-
-<MortgageBrokerCard
- name="Carlos Mendoza" 
- company="MortgagePro Mexico"
- rating={4.9} reviewCount={156} 
- priceRangeMin="$13K"
-  priceRangeMax="$3.8M" salesCount={526} imageUrl={profile.src} />
-
+                <MortgageBrokerCard
+                  name="Carlos Mendoza"
+                  company="MortgagePro Mexico"
+                  rating={4.9}
+                  reviewCount={156}
+                  priceRangeMin="$13K"
+                  priceRangeMax="$3.8M"
+                  salesCount={526}
+                  imageUrl={profile.src}
+                />
               </Link>
             ))}
           </div>

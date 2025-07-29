@@ -9,9 +9,7 @@ import { useState } from "react";
 import profile from "@/assets/agent/Image (8).png";
 
 
-interface BrokerDetailsProps {
-  brokerId: string;
-}
+
 
 interface Review {
   id: number;
@@ -21,13 +19,13 @@ interface Review {
   avatar: string;
 }
 
-export function BrokerDetailsPage({ brokerId }: BrokerDetailsProps) {
+export function BrokerDetailsPage() {
   const [newReview, setNewReview] = useState("");
   const [newRating, setNewRating] = useState(0);
 
   // Mock broker data
   const broker = {
-    id: brokerId,
+    id: "1",
     name: "Carlos Mendoza",
     company: "MortgagePro Mexico",
     rating: 4.9,
@@ -63,7 +61,7 @@ export function BrokerDetailsPage({ brokerId }: BrokerDetailsProps) {
       console.log("New review submitted:", {
         rating: newRating,
         comment: newReview,
-        brokerId: brokerId,
+        brokerId: broker.id,
       });
       setNewReview("");
       setNewRating(0);
