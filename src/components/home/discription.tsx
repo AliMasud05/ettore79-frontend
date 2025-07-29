@@ -280,7 +280,11 @@ const HomeDiscription = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold secondary-font  text-black mb-6 leading-12">
-                At OIKY.mx, our main objective with the TRUE AGENT<sup>TM</sup>{" "}
+                At OIKY.mx, our main objective with the{" "}
+                <span className="text-[#FF914C] font-semibold">
+                  {" "}
+                  TRUE AGENT<sup>TM</sup>{" "}
+                </span>
                 initiative is to provide real confidence to buyers and sellers
               </h2>
               <div>
@@ -352,8 +356,12 @@ const HomeDiscription = () => {
                   Mexico.
                 </p>
               </div>
-              <Button className="bg-[#FF914C] hover:bg-orange-600
-               text-white px-8 py-6 text-base min-w-[250px]">                Register
+              <Button
+                className="bg-[#FF914C] hover:bg-orange-600
+               text-white px-8 py-6 text-base min-w-[250px]"
+              >
+                {" "}
+                Register
               </Button>
             </div>
             <div ref={registerImagesRef} className="gap-4">

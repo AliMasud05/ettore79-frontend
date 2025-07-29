@@ -29,7 +29,7 @@ export function BasicInformation({
   };
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="w-full max-w-6xl">
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-gray-900 mb-2">
           Basic Information

@@ -317,7 +317,7 @@ export default function AgentsPage() {
             alt="Agent Image"
             width={1000}
             height={1000}
-            className="object-cover object-center"
+            className="object-cover object-center h-40"
             priority
           />
         </div>

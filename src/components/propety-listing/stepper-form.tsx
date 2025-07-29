@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { FeaturesAmenities } from "./steps/features-amenities";
@@ -7,7 +6,6 @@ import { PropertyDetails } from "./steps/property-details";
 import { PhotosMedia } from "./steps/photos-media";
 import { PricingContact } from "./steps/pricing-contact";
 import { BasicInformation } from "./steps/basic-information";
-
 
 export interface FormData {
   // Basic Information
@@ -24,7 +22,6 @@ export interface FormData {
   city: string;
   state: string;
   zipCode: string;
-
   // Property Details
   bedrooms: string;
   fullBathrooms: string;
@@ -33,7 +30,6 @@ export interface FormData {
   lotArea: string;
   yearBuilt: string;
   propertyDescription: string;
-
   // Features & Amenities
   interiorAmenities: {
     airConditioning: boolean;
@@ -55,10 +51,8 @@ export interface FormData {
     eventRoom: boolean;
     petFriendly: boolean;
   };
-
   // Photos & Media
   photos: File[];
-
   // Pricing & Contact
   price: string;
   fullName: string;
@@ -84,7 +78,6 @@ export function StepperForm() {
     city: "",
     state: "",
     zipCode: "",
-
     // Property Details
     bedrooms: "",
     fullBathrooms: "",
@@ -93,7 +86,6 @@ export function StepperForm() {
     lotArea: "",
     yearBuilt: "",
     propertyDescription: "",
-
     // Features & Amenities
     interiorAmenities: {
       airConditioning: false,
@@ -115,10 +107,8 @@ export function StepperForm() {
       eventRoom: false,
       petFriendly: false,
     },
-
     // Photos & Media
     photos: [],
-
     // Pricing & Contact
     price: "",
     fullName: "",
@@ -154,7 +144,6 @@ export function StepperForm() {
       state: formData.state,
       zipCode: formData.zipCode,
     });
-
     console.log("\n=== PROPERTY DETAILS ===");
     console.log("Bedrooms:", formData.bedrooms);
     console.log("Full Bathrooms:", formData.fullBathrooms);
@@ -163,15 +152,12 @@ export function StepperForm() {
     console.log("Lot Area:", formData.lotArea);
     console.log("Year Built:", formData.yearBuilt);
     console.log("Description:", formData.propertyDescription);
-
     console.log("\n=== FEATURES & AMENITIES ===");
     console.log("Interior Amenities:", formData.interiorAmenities);
     console.log("Exterior Features:", formData.exteriorFeatures);
-
     console.log("\n=== PHOTOS & MEDIA ===");
     console.log("Number of Photos:", formData.photos.length);
     console.log("Photos:", formData.photos);
-
     console.log("\n=== PRICING & CONTACT ===");
     console.log("Price:", formData.price);
     console.log("Contact Info:", {
@@ -179,7 +165,6 @@ export function StepperForm() {
       email: formData.email,
       phone: formData.phoneNumber,
     });
-
     alert("Form submitted successfully! Check the console for detailed data.");
   };
 
@@ -220,45 +205,66 @@ export function StepperForm() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className=" px-4">
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-blue-600 mb-8">
           List Your Property
         </h1>
 
-        {/* Stepper */}
-        <div className="flex items-center justify-center mb-12">
-          {steps.map((step, index) => (
-            <div key={step.id} className="flex items-center">
-              <div className="flex flex-col items-center">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
-                    step.id <= currentStep
-                      ? "bg-orange-500 text-white"
-                      : "bg-gray-300 text-gray-600"
-                  }`}
-                >
-                  {step.id}
+        {/* Updated Stepper */}
+        <div className="w-full mx-auto mb-12">
+          <div className="relative">
+            {/* Background line */}
+            <div
+              className=" absolute top-3 left-0 right-0 h-0.5
+            max-w-[780px] mx-auto
+            bg-gray-200"
+            ></div>
+
+            {/* Progress line */}
+            <div
+              className="absolute top-3 left-0 right-0 h-0.5
+            max-w-[780px] mx-auto
+            bg-blue-200"
+              style={{
+                width: `${((currentStep - 1) / (steps.length - 1)) * 100}%`,
+              }}
+            ></div>
+
+            {/* Steps */}
+            <div className="relative flex justify-between">
+              {steps.map((step, index) => (
+                <div key={step.id} className="flex flex-col items-center">
+                  {/* Step circle */}
+                  <div
+                    className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-200 ${
+                      step.id <= currentStep
+                        ? "bg-orange-500 text-white shadow-lg"
+                        : "bg-white border-2 border-gray-200 text-gray-400"
+                    }`}
+                  >
+                    {step.id}
+                  </div>
+
+                  {/* Step name */}
+                  <div className="mt-3 text-center">
+                    <span
+                      className={`text-xs sm:text-sm font-medium
+                         transition-colors duration-200 ${
+                           step.id === currentStep
+                             ? "text-orange-500"
+                             : step.id < currentStep
+                             ? "text-gray-600"
+                             : "text-gray-400"
+                         }`}
+                    >
+                      {step.name}
+                    </span>
+                  </div>
                 </div>
-                <span
-                  className={`mt-2 text-sm ${
-                    step.id === currentStep
-                      ? "text-orange-500 font-medium"
-                      : "text-gray-600"
-                  }`}
-                >
-                  {step.name}
-                </span>
-              </div>
-              {index < steps.length - 1 && (
-                <div
-                  className={`w-24 h-0.5 mx-4 ${
-                    step.id < currentStep ? "bg-orange-500" : "bg-gray-300"
-                  }`}
-                />
-              )}
+              ))}
             </div>
-          ))}
+          </div>
         </div>
       </div>
 
