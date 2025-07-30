@@ -38,10 +38,10 @@ export function FeaturesAmenities({
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">
+        <h2 className="text-3xl md:text-5xl font-normal text-gray-900 mb-2">
           Features & Amenities
         </h2>
-        <p className="text-gray-600">Select all that apply to your property.</p>
+        <p className="text-gray-600 text-base mt-3">Select all that apply to your property.</p>
       </div>
 
       <div className="space-y-12">

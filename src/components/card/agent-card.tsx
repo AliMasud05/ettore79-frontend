@@ -1,5 +1,5 @@
 "use client";
-import { Facebook,  Linkedin, Star } from "lucide-react";
+import { Facebook, Linkedin, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -19,14 +19,11 @@ export default function ProfileCard({
   rating,
   reviewCount,
   company,
-  priceRangeMin,
-  priceRangeMax,
-  salesCount,
+
   imageUrl,
 
 }: ProfileCardProps) {
   return (
-    
     <Link href={`/agent/${name}`} className="cursor-pointer">
       <div className="w-auto h-[440px] relative bg-stone-100 shadow-lg border-0 rounded-lg overflow-hidden">
         <div>
@@ -66,14 +63,16 @@ export default function ProfileCard({
           {/* Performance Metrics */}
           <div className="space-y-1">
             <p className="text-base font-medium flex gap-3 text-gray-900">
-              <span className="font-normal text-base ">
+              {/* <span className="font-normal text-base ">
                 {priceRangeMin}-{priceRangeMax}
               </span>{" "}
-              <span>price range</span>
+              <span>price range</span> */}
+              <p>Years of experience: 3 </p>
             </p>
             <p className="text-base font-medium flex gap-3 text-gray-900">
-              <span className="font-normal text-base">{salesCount}</span>
-              <span>Sales last 12 months</span>
+              {/* <span className="font-normal text-base">{salesCount}</span>
+              <span>Sales last 12 months</span> */}
+              Years Specialties: Market Knowledge
             </p>
           </div>
 

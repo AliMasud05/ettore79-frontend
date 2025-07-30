@@ -1,16 +1,18 @@
 "use client";
 
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import type { FormData } from "@/components/propety-listing/stepper-form";
-
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Textarea } from "@/components/ui/textarea";
+import { format } from "date-fns";
+import { CalendarIcon } from "lucide-react";
 
 interface PropertyDetailsProps {
   formData: FormData;
@@ -24,23 +26,35 @@ export function PropertyDetails({
   const handleSelectChange = (field: keyof FormData, value: string) => {
     updateFormData({ [field]: value });
   };
+  console.log(handleSelectChange);
 
   const handleTextareaChange = (value: string) => {
     updateFormData({ propertyDescription: value });
   };
 
+  const handleNumberChange = (field: keyof FormData, value: string) => {
+    // Only allow numbers, remove any non-digit characters
+    const numericValue = value.replace(/\D/g, "");
+    updateFormData({ [field]: numericValue });
+  };
+
+  const handleYearSelect = (date: Date | undefined) => {
+    if (date) {
+      updateFormData({ yearBuilt: date.getFullYear().toString() });
+    }
+  };
+
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">
+        <h2 className="text-3xl md:text-5xl font-normal text-gray-900 mb-2">
           Property Details
         </h2>
         <p className="text-gray-600">
           Tell us about your property and its location
         </p>
       </div>
-
-      <div className="space-y-8">
+      <div className="space-y-6">
         {/* Bedrooms, Full Bathrooms, Half Bathrooms */}
         <div className="grid grid-cols-3 gap-6">
           <div>
@@ -50,21 +64,15 @@ export function PropertyDetails({
             >
               Bedrooms <span className="text-red-500">*</span>
             </Label>
-            <Select
+            <Input
+              id="bedrooms"
+              type="number"
+              min="1"
+              placeholder="Enter number of bedrooms"
               value={formData.bedrooms}
-              onValueChange={(value) => handleSelectChange("bedrooms", value)}
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Select bedrooms" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="1">1</SelectItem>
-                <SelectItem value="2">2</SelectItem>
-                <SelectItem value="3">3</SelectItem>
-                <SelectItem value="4">4</SelectItem>
-                <SelectItem value="5">5+</SelectItem>
-              </SelectContent>
-            </Select>
+              onChange={(e) => handleNumberChange("bedrooms", e.target.value)}
+              className="h-12"
+            />
           </div>
           <div>
             <Label
@@ -73,23 +81,17 @@ export function PropertyDetails({
             >
               Full Bathrooms <span className="text-red-500">*</span>
             </Label>
-            <Select
+            <Input
+              id="full-bathrooms"
+              type="number"
+              min="1"
+              placeholder="Enter number of full bathrooms"
               value={formData.fullBathrooms}
-              onValueChange={(value) =>
-                handleSelectChange("fullBathrooms", value)
+              onChange={(e) =>
+                handleNumberChange("fullBathrooms", e.target.value)
               }
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Select bathrooms" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="1">1</SelectItem>
-                <SelectItem value="2">2</SelectItem>
-                <SelectItem value="3">3</SelectItem>
-                <SelectItem value="4">4</SelectItem>
-                <SelectItem value="5">5+</SelectItem>
-              </SelectContent>
-            </Select>
+              className="h-12"
+            />
           </div>
           <div>
             <Label
@@ -98,22 +100,17 @@ export function PropertyDetails({
             >
               Half Bathrooms <span className="text-red-500">*</span>
             </Label>
-            <Select
+            <Input
+              id="half-bathrooms"
+              type="number"
+              min="0"
+              placeholder="Enter number of half bathrooms"
               value={formData.halfBathrooms}
-              onValueChange={(value) =>
-                handleSelectChange("halfBathrooms", value)
+              onChange={(e) =>
+                handleNumberChange("halfBathrooms", e.target.value)
               }
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Select half bathrooms" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="0">0</SelectItem>
-                <SelectItem value="1">1</SelectItem>
-                <SelectItem value="2">2</SelectItem>
-                <SelectItem value="3">3</SelectItem>
-              </SelectContent>
-            </Select>
+              className="h-12"
+            />
           </div>
         </div>
 
@@ -126,22 +123,15 @@ export function PropertyDetails({
             >
               Built Area (m²) <span className="text-red-500">*</span>
             </Label>
-            <Select
+            <Input
+              id="built-area"
+              type="number"
+              min="50"
+              placeholder="Enter built area in m²"
               value={formData.builtArea}
-              onValueChange={(value) => handleSelectChange("builtArea", value)}
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Select built area" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="100">100</SelectItem>
-                <SelectItem value="150">150</SelectItem>
-                <SelectItem value="200">200</SelectItem>
-                <SelectItem value="250">250</SelectItem>
-                <SelectItem value="300">300</SelectItem>
-                <SelectItem value="400">400+</SelectItem>
-              </SelectContent>
-            </Select>
+              onChange={(e) => handleNumberChange("builtArea", e.target.value)}
+              className="h-12"
+            />
           </div>
           <div>
             <Label
@@ -150,59 +140,59 @@ export function PropertyDetails({
             >
               Lot Area (m²)
             </Label>
-            <Select
+            <Input
+              id="lot-area"
+              type="number"
+              min="50"
+              placeholder="Enter lot area in m²"
               value={formData.lotArea}
-              onValueChange={(value) => handleSelectChange("lotArea", value)}
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Select lot area" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="200">200</SelectItem>
-                <SelectItem value="250">250</SelectItem>
-                <SelectItem value="300">300</SelectItem>
-                <SelectItem value="400">400</SelectItem>
-                <SelectItem value="500">500+</SelectItem>
-              </SelectContent>
-            </Select>
+              onChange={(e) => handleNumberChange("lotArea", e.target.value)}
+              className="h-12"
+            />
           </div>
         </div>
 
-        {/* Year Built */}
-        <div className="grid grid-cols-2 gap-6">
-          <div>
-            <Label
-              htmlFor="year-built"
-              className="text-base font-medium mb-2 block"
-            >
-              Year Built
-            </Label>
-            <Select
-              value={formData.yearBuilt}
-              onValueChange={(value) => handleSelectChange("yearBuilt", value)}
-            >
-              <SelectTrigger className="h-12">
-                <SelectValue placeholder="Select year built" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="2024">2024</SelectItem>
-                <SelectItem value="2023">2023</SelectItem>
-                <SelectItem value="2022">2022</SelectItem>
-                <SelectItem value="2021">2021</SelectItem>
-                <SelectItem value="2020">2020</SelectItem>
-                <SelectItem value="2019">2019</SelectItem>
-                <SelectItem value="2018">2018</SelectItem>
-                <SelectItem value="2017">2017</SelectItem>
-                <SelectItem value="2016">2016</SelectItem>
-                <SelectItem value="2015">2015</SelectItem>
-                <SelectItem value="2010">2010</SelectItem>
-                <SelectItem value="2008">2008</SelectItem>
-                <SelectItem value="2005">2005</SelectItem>
-                <SelectItem value="2000">2000</SelectItem>
-                <SelectItem value="older">Older</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+        {/* Year Built - Calendar Selector */}
+        <div className="max-w-md">
+          <Label
+            htmlFor="year-built"
+            className="text-base font-medium mb-2 block"
+          >
+            Year Built
+          </Label>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className="w-full h-12 justify-start text-left font-normal"
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {formData.yearBuilt ? (
+                  format(new Date(parseInt(formData.yearBuilt), 1, 1), "yyyy")
+                ) : (
+                  <span>Select year built</span>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0">
+              <Calendar
+                mode="single"
+                selected={
+                  formData.yearBuilt
+                    ? new Date(parseInt(formData.yearBuilt), 0, 1)
+                    : undefined
+                }
+                onSelect={handleYearSelect}
+                initialFocus
+                defaultMonth={new Date(2020, 0)}
+                fromYear={1900}
+                toYear={new Date().getFullYear()}
+                captionLayout="dropdown"
+             
+                className="rounded-md border"
+              />
+            </PopoverContent>
+          </Popover>
         </div>
 
         {/* Property Description */}

@@ -25,8 +25,8 @@ const Navbar = () => {
             <Link href="/buy" className="text-gray-700 hover:text-gray-900">
               Buy
             </Link>
-            <Link href="/rent" className="text-gray-700 hover:text-gray-900">
-              Rent
+            <Link href="/property-listing" className="text-gray-700 hover:text-gray-900">
+              Property Listing
             </Link>
             <Link href="/agent" className="text-gray-700 hover:text-gray-900">
               Agents
@@ -108,10 +108,10 @@ const Navbar = () => {
                       Buy
                     </Link>
                     <Link
-                      href="/rent"
+                      href="/property-listing"
                       className="text-gray-700 hover:text-gray-900 text-lg text-center"
                     >
-                      Rent
+                      Property Listing
                     </Link>
                     <Link
                       href="/agent"

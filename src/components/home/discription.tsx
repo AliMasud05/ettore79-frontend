@@ -15,6 +15,7 @@ import img5 from "@/assets/home/register/img5.png";
 // GSAP
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import Link from "next/link";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -173,7 +174,7 @@ const HomeDiscription = () => {
     <div>
       {/* What will you find on OIKY? */}
       <section ref={section1Ref} className="py-20 bg-gray-50">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <Image
@@ -185,53 +186,44 @@ const HomeDiscription = () => {
               />
             </div>
             <div className="order-1 lg:order-2">
-              <h2 className="text-4xl font-bold  text-black secondary-font mb-8">
-                What will you find on OIKY?
-              </h2>
-              <div className="space-y-6">
-                {[
-                  {
-                    title: "Property Listings",
-                    desc: "Explore our vast database of properties, immersive virtual tours, and the best search experience.",
-                  },
-                  {
-                    title: "Neighborhood and School Guides",
-                    desc: "Discover what it's like to live in each area before you move. Know the safety, connectivity, lifestyle, nearby services, and much more.",
-                  },
-                  {
-                    title: "TRUE AGENT",
-                    desc: "A transparent and reliable directory of real estate agents, brokers, and other professionals in the sector with verified profiles, track records, coverage areas, and customer reviews.",
-                  },
-                  {
-                    title: "Content and Learning Center",
-                    desc: "Practical guides, news, videos, and courses designed for each type of user: buyers, property owners, agents, brokers, and investors.",
-                  },
-                  {
-                    title: "Professional Tools",
-                    desc: "Property listing, advertising solutions, lead generation, and digital communication: chats, brokers, and agencies.",
-                  },
-                  {
-                    title: "Real Connection with Clients",
-                    desc: "We build bridges of trust between those looking for a new home and those making it possible.",
-                  },
-                ].map((item, index) => (
-                  <div
-                    key={index}
-                    ref={(el) => {
-                      listItemsRef.current[index] = el;
-                    }}
-                  >
-                    <h3></h3>
-                    <p className="text-[#666] text-lg">
-                      <span className="font-semibold text-lg text-gray-900 mb-2">
-                        {item.title}:
-                      </span>{" "}
-                      <span className="text-[#666] text-base font-normal">
-                        {item.desc}
-                      </span>
-                    </p>
-                  </div>
-                ))}
+              <div>
+                <h2 className="text-4xl font-bold  text-black secondary-font mb-8">
+                  What is TRUE AGENT?
+                </h2>
+                <p>
+                  Is a unique tool within our platform that goes beyond listing
+                  agents. It is a space designed to connect people with trusted,
+                  trained, and vetted real estate professionals, providing
+                  transparency and trust at every step of the buying, selling
+                  and renting process.
+                </p>
+              </div>
+              <div>
+                <h2>What can you find on TRUE AGENT?</h2>
+                <p>
+                  In each real estate agent or mortgage advisor profile, you
+                  will see key information such as:
+                </p>
+                <ul>
+                  <li>
+                    Professional experience (years in the industry, closed
+                    transactions).
+                  </li>
+                  <li>
+                    Specialization (type of properties handled: houses, land,
+                    apartments, luxury, investment, Infonavit credit, Fovissste
+                    credit, bank loans, etc.).
+                  </li>
+                  <li>
+                    Coverage area (neighborhoods, cities, or regions where they
+                    work).
+                  </li>
+                  <li>
+                    Affiliation (whether they are part of a professional
+                    association or organization).
+                  </li>
+                  <li>Reviews (ratings, comments from previous clients).</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -280,17 +272,21 @@ const HomeDiscription = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl font-bold secondary-font  text-black mb-6 leading-12">
-                At OIKY.mx, our main objective with the{" "}
-                <span className="text-[#FF914C] font-semibold">
-                  {" "}
-                  TRUE AGENT<sup>TM</sup>{" "}
-                </span>
-                initiative is to provide real confidence to buyers and sellers
+                Why use TRUE AGENT?
               </h2>
+              <p>
+                Because we want both buyers and sellers to make informed and
+                confident decisions. By consulting TRUE AGENTTM, you&lsquo;ll
+                know who you&rsquo dealing with, their experience, and whether
+                they&apos;re the right person to guide you through one of the
+                most important decisions of your life.
+              </p>
               <div>
                 <p className="text-[#666] text-base font-normal mb-4 ">
-                  Find a vetted professional with experience and genuine
-                  commitment to your success.
+                  TRUE AGENTTM is also an opportunity to position yourself as a
+                  serious and transparent professional, showcase your track
+                  record, and build more trust with potential clients. Here,
+                  your experience really counts.
                 </p>
                 <p className="text-[#666] text-base font-normal">
                   We believe that those who respect the buyer&apos;s needs must
@@ -301,12 +297,14 @@ const HomeDiscription = () => {
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-4 mt-4 lg:mt-6">
-                <Button
-                  className="bg-[#FF914C] hover:bg-orange-600
+                <Link href="/true-agent">
+                  <Button
+                    className="bg-[#FF914C] hover:bg-orange-600
                  text-white px-6 py-6 text-base"
-                >
-                  Become a Free Agent
-                </Button>
+                  >
+                    Become a Free Agent
+                  </Button>
+                </Link>
                 <Button
                   variant="outline"
                   className="border-gray-300 text-[#666] px-6 py-6 text-base

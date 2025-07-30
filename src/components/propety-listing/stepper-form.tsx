@@ -207,34 +207,20 @@ export function StepperForm() {
   return (
     <div className=" px-4">
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-blue-600 mb-8">
+        <h1 className="text-5xl secondary-font pb-4 font-bold text-blue-600 mb-8">
           List Your Property
         </h1>
 
         {/* Updated Stepper */}
         <div className="w-full mx-auto mb-12">
           <div className="relative">
-            {/* Background line */}
-            <div
-              className=" absolute top-3 left-0 right-0 h-0.5
-            max-w-[780px] mx-auto
-            bg-gray-200"
-            ></div>
-
-            {/* Progress line */}
-            <div
-              className="absolute top-3 left-0 right-0 h-0.5
-            max-w-[780px] mx-auto
-            bg-blue-200"
-              style={{
-                width: `${((currentStep - 1) / (steps.length - 1)) * 100}%`,
-              }}
-            ></div>
-
-            {/* Steps */}
+            {/* Steps container */}
             <div className="relative flex justify-between">
-              {steps.map((step, index) => (
-                <div key={step.id} className="flex flex-col items-center">
+              {steps.map((step) => (
+                <div
+                  key={step.id}
+                  className="flex flex-col items-center relative z-10"
+                >
                   {/* Step circle */}
                   <div
                     className={`w-7 h-7 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-200 ${
@@ -249,14 +235,13 @@ export function StepperForm() {
                   {/* Step name */}
                   <div className="mt-3 text-center">
                     <span
-                      className={`text-xs sm:text-sm font-medium
-                         transition-colors duration-200 ${
-                           step.id === currentStep
-                             ? "text-orange-500"
-                             : step.id < currentStep
-                             ? "text-gray-600"
-                             : "text-gray-400"
-                         }`}
+                      className={`text-xs sm:text-sm font-medium transition-colors duration-200 ${
+                        step.id === currentStep
+                          ? "text-orange-500"
+                          : step.id < currentStep
+                          ? "text-gray-600"
+                          : "text-gray-400"
+                      }`}
                     >
                       {step.name}
                     </span>
@@ -264,6 +249,28 @@ export function StepperForm() {
                 </div>
               ))}
             </div>
+
+            {/* Background line - spans from first to last step */}
+            <div
+              className="absolute top-3.5 h-0.5 bg-gray-200"
+              style={{
+                left: "50%",
+                right: "50%",
+                width: `calc(100% - 120px)`, // 100% minus the width of two circles (14px each)
+                transform: "translateX(-50%)",
+              }}
+            ></div>
+
+            {/* Progress line */}
+            <div
+              className="absolute top-3.5 h-0.5 bg-[#FF924D]"
+              style={{
+                left: "50%",
+                width: `${((currentStep - 1) / (steps.length - 1)) * 100}%`,
+                transform: "translateX(-50%)",
+                maxWidth: "calc(100% - 120px)", // Same as background line
+              }}
+            ></div>
           </div>
         </div>
       </div>
@@ -277,21 +284,23 @@ export function StepperForm() {
           variant="outline"
           onClick={handlePrevious}
           disabled={currentStep === 1}
-          className="px-8 bg-transparent"
+          className="px-8 py-5 bg-transparent"
         >
           Previous
         </Button>
         {currentStep === steps.length ? (
           <Button
             onClick={handleSubmit}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-8"
+            className="bg-orange-500 hover:bg-orange-600
+             text-white px-8 py-5"
           >
             Submit
           </Button>
         ) : (
           <Button
             onClick={handleNext}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-8"
+            className="bg-orange-500 hover:bg-orange-600
+            py-5 text-white px-8"
           >
             Next
           </Button>

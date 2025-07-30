@@ -29,12 +29,12 @@ export function BasicInformation({
   };
 
   return (
-    <div className="w-full max-w-6xl">
+    <div className="w-full max-w-6xl border-2 border-gray-200 rounded-lg p-4 space-y-4">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">
+        <h2 className="text-3xl md:text-5xl font-normal text-gray-900 mb-2">
           Basic Information
         </h2>
-        <p className="text-gray-600">
+        <p className="text-gray-600 text-base font-normal">
           Tell us about your property and its location
         </p>
       </div>
@@ -42,7 +42,7 @@ export function BasicInformation({
       <div className="space-y-8">
         {/* Listing Type */}
         <div>
-          <Label className="text-base font-medium mb-4 block">
+          <Label className="text-base font-medium mb-4 block text-gray-600">
             Listing Type <span className="text-red-500">*</span>
           </Label>
           <div className="grid grid-cols-2 gap-4">

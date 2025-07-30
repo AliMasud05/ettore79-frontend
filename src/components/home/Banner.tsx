@@ -160,7 +160,7 @@ const Banner = () => {
             </div>
 
             {/* See Neighborhoods */}
-            <div className="bg-[#2E18BD] text-white p-6 rounded-lg">
+            <div className="bg-[#5044b1] text-white p-6 rounded-lg">
               <div className="mb-4">
                 <MapPin className="h-8 w-8" />
               </div>

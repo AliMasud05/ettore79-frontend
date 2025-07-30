@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
 import { BrokerDetailsPage } from "@/components/mortgage-broker/broker-details";
 
 
