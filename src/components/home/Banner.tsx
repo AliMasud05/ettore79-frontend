@@ -8,15 +8,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Home, MapPin, TrendingUp, Users } from "lucide-react";
-import Image from "next/image";
-import bannerImage from "@/assets/banner/mortgages.png";
 
 const Banner = () => {
   return (
     <div className="overflow-hidden">
       {/* Hero Section */}
       <main className="relative overflow-hidden">
-        <div className="absolute inset-0">
+        {/* <div className="absolute inset-0">
           <Image
             src={bannerImage.src}
             alt="Modern interior background"
@@ -25,14 +23,27 @@ const Banner = () => {
             priority
           />
           <div className="absolute inset-0 bg-white/20" />
+        </div> */}
+        <div className="absolute inset-0 z-">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute w-full h-full object-cover"
+          >
+            <source src="./property.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className="absolute inset-0 bg-black/20"></div>
         </div>
 
         <div className="relative z-10 px-6 py-20">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="md:text-5xl text-3xl font-bold text-gray-900 mb-6">
+            <h1 className="md:text-5xl text-3xl font-bold text-[#dde9eb] mb-6">
               The New Era of Real Estate has Arrived in Mexico
             </h1>
-            <p className="text-lg md:text-xl text-center text-black/80 mb-12 font-normal max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-center text-[#dde9eb] mb-12 font-normal max-w-3xl mx-auto tracking-tight font-sans">
               We connect buyers, sellers, tenants, and professionals in one
               comprehensive digital platform
             </p>

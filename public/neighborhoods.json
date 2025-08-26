@@ -1,0 +1,135 @@
+{
+  "old-west-austin": {
+    "name": "Old West Austin",
+    "city": "Austin TX",
+    "heroImage": "/old-west-austin-neighborhood-houses-trees.png",
+    "overview": {
+      "medianHomePrice": "$1.2M",
+      "medianRent": "$4.5K",
+      "walkScore": 85,
+      "bikeScore": 78,
+      "transitScore": 65,
+      "quickFacts": [
+        "Historic neighborhood with tree-lined streets",
+        "Close to downtown Austin",
+        "Mix of historic and modern homes",
+        "Excellent walkability"
+      ]
+    },
+    "photos": {
+      "outdoors": "/placeholder.svg?height=120&width=120",
+      "mainStreets": "/placeholder.svg?height=120&width=120",
+      "sideStreets": "/placeholder.svg?height=120&width=120",
+      "homeStyles": "/placeholder.svg?height=120&width=120"
+    },
+    "exploreCategories": [
+      "Highlights",
+      "Restaurants",
+      "Groceries",
+      "Nightlife",
+      "Cafes",
+      "Shopping",
+      "Arts and Entertainment",
+      "Fitness"
+    ],
+    "mapCenter": [30.2672, -97.7431],
+    "businesses": {
+      "Highlights": [
+        { "name": "Zilker Park", "lat": 30.2672, "lng": -97.7431, "type": "Park" },
+        { "name": "Austin City Limits", "lat": 30.2669, "lng": -97.7428, "type": "Venue" }
+      ],
+      "Restaurants": [
+        { "name": "Uchi", "lat": 30.2675, "lng": -97.7435, "type": "Japanese" },
+        { "name": "Barton Springs Saloon", "lat": 30.267, "lng": -97.7425, "type": "American" }
+      ],
+      "Cafes": [
+        { "name": "Radio Coffee", "lat": 30.2668, "lng": -97.744, "type": "Coffee" },
+        { "name": "Jo's Coffee", "lat": 30.2665, "lng": -97.7438, "type": "Coffee" }
+      ]
+    },
+    "schools": [
+      {
+        "name": "Gardner Elementary School",
+        "type": "Elementary",
+        "rating": 10,
+        "students": 244,
+        "grades": "K-5",
+        "isPublic": true,
+        "parentRating": 4.5,
+        "greatSchoolRating": 10,
+        "description": "My son attended kindergarten and first grade at Gardner and I struggled a lot with the school system at UF.",
+        "parentReview": {
+          "name": "Parent Review",
+          "avatar": "/placeholder.svg?height=32&width=32"
+        }
+      },
+      {
+        "name": "Gardner Elementary School",
+        "type": "Elementary",
+        "rating": 10,
+        "students": 244,
+        "grades": "K-5",
+        "isPublic": true,
+        "parentRating": 4.5,
+        "greatSchoolRating": 10,
+        "description": "My son attended kindergarten and first grade at Gardner and I struggled a lot with the school system at UF.",
+        "parentReview": {
+          "name": "Parent Review",
+          "avatar": "/placeholder.svg?height=32&width=32"
+        }
+      }
+    ],
+    "agents": [
+      {
+        "name": "Olivia Rhye",
+        "company": "Americorp Real Estate",
+        "rating": 4.9,
+        "reviews": 127,
+        "experience": "3 Years",
+        "specialties": ["Market Knowledge"],
+        "avatar": "/placeholder.svg?height=120&width=120",
+        "contact": {
+          "phone": "(555) 123-4567",
+          "email": "olivia@americorp.com"
+        }
+      },
+      {
+        "name": "Olivia Rhye",
+        "company": "Americorp Real Estate",
+        "rating": 4.9,
+        "reviews": 127,
+        "experience": "3 Years",
+        "specialties": ["Property Valuation"],
+        "avatar": "/placeholder.svg?height=120&width=120",
+        "contact": {
+          "phone": "(555) 123-4568",
+          "email": "john@americorp.com"
+        }
+      }
+    ],
+    "homes": [
+      {
+        "id": 1,
+        "title": "Serenity at Whispering Pines Retreat",
+        "price": "$2,500,000",
+        "address": "3407 Ranchview Dr. Richardson, California",
+        "beds": 4,
+        "baths": 3,
+        "sqft": "4 Guests",
+        "image": "/placeholder.svg?height=300&width=400",
+        "type": "sale"
+      },
+      {
+        "id": 2,
+        "title": "Serenity at Whispering Pines Retreat",
+        "price": "$2,500,000",
+        "address": "3407 Ranchview Dr. Richardson, California",
+        "beds": 4,
+        "baths": 3,
+        "sqft": "4 Guests",
+        "image": "/placeholder.svg?height=300&width=400",
+        "type": "sale"
+      }
+    ]
+  }
+}

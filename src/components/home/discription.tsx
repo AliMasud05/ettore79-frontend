@@ -1,16 +1,19 @@
 "use client";
-import Image from "next/image";
-import React, { useEffect, useRef } from "react";
-import { Button } from "../ui/button";
-import Blog from "./Blog";
-import findOiky from "@/assets/home/findOiky.png";
-import differentOIky from "@/assets/home/differentOIky.png";
 import AtOIKY from "@/assets/home/AtOIKY.png";
+import differentOIky from "@/assets/home/differentOIky.png";
+import findOiky from "@/assets/home/findOiky.png";
+import neighborhood from "@/assets/home/neighborhoodAndSchool.jpg";
+import oikyAcademy from "@/assets/home/oikyAcademy.jpg";
 import img1 from "@/assets/home/register/img1.png";
 import img2 from "@/assets/home/register/img2.png";
 import img3 from "@/assets/home/register/img3.jpg";
 import img4 from "@/assets/home/register/img4.png";
 import img5 from "@/assets/home/register/img5.png";
+import trueAgent from "@/assets/home/true-agent.png";
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+import { Button } from "../ui/button";
+import Blog from "./Blog";
 
 // GSAP
 import { gsap } from "gsap";
@@ -265,9 +268,127 @@ const HomeDiscription = () => {
           </div>
         </div>
       </section>
+      {/* TRUE AGENT directory */}
+      <section className="grid grid-cols-2 container mx-auto justify-center  gap-6 py-6">
+        <div>
+          <Image
+            src={trueAgent.src}
+            alt="Modern house exterior"
+            width={500}
+            height={400}
+            className="rounded-lg object-cover w-full h-[400px]"
+          />
+        </div>
+        <div className="flex flex-col gap-4 space-y-4 mt-10">
+          <div className="space-y-2">
+            <h2 className="text-[44px] font-bold secondary-font">
+              True Agent Directory
+            </h2>
+            <p className="text-[#666] text-xl font-normal ">
+              Behind every good real estate decision there’s always a committed
+              and <br /> qualified agent
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 mt-4 lg:mt-6">
+            <Link href="/true-agent">
+              <Button
+                className="bg-[#FF914C] hover:bg-orange-600
+                 text-white px-6 py-6 text-base"
+              >
+                Find a Professional
+              </Button>
+            </Link>
+            <Button
+              variant="outline"
+              className="border-gray-300 text-[#666] px-6 py-6 text-base
+                   bg-transparent"
+            >
+              Become a Free Agent
+            </Button>
+          </div>
+        </div>
+      </section>
+      {/* neighborhoods and schools  guide */}
+      <section className="grid grid-cols-2 container mx-auto justify-center  gap-6 py-10">
+        <div className="flex flex-col gap-4 space-y-4 mt-10">
+          <div className="space-y-2">
+            <h2 className="text-[44px] font-bold secondary-font">
+              Neighborhoods and schools guides
+            </h2>
+            <p className="text-[#666] text-xl font-normal ">
+              Discover the perfect neighborhood for you
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 mt-4 lg:mt-6">
+            <Link href="/true-agent">
+              <Button
+                className="bg-[#FF914C] hover:bg-orange-600
+                 text-white px-6 py-6 text-base"
+              >
+                Explore a neighborhood
+              </Button>
+            </Link>
+            <Button
+              variant="outline"
+              className="border-gray-300 text-[#666] px-6 py-6 text-base
+                   bg-transparent"
+            >
+              Find the best Schools
+            </Button>
+          </div>
+        </div>
+        <div>
+          <Image
+            src={neighborhood.src}
+            alt="Modern house exterior"
+            width={500}
+            height={400}
+            className="rounded-lg object-cover w-full h-[400px]"
+          />
+        </div>
+      </section>
+      {/* oiky academy  */}
+      <section className="grid grid-cols-2 container mx-auto justify-center  gap-6 p-20">
+        <div>
+          <Image
+            src={oikyAcademy.src}
+            alt="Modern house exterior"
+            width={500}
+            height={400}
+            className="rounded-lg object-cover w-full h-[400px]"
+          />
+        </div>
+        <div className="flex flex-col gap-4 space-y-4 mt-10">
+          <div className="space-y-2">
+            <h2 className="text-[44px] font-bold secondary-font">
+              Oiky Academy
+            </h2>
+            <p className="text-[#666] text-xl font-normal leading-8 ">
+              Learn from the best and become one of them
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-4 mt-4 lg:mt-6">
+            <Link href="/true-agent">
+              <Button
+                className="bg-[#FF914C] hover:bg-orange-600
+                 text-white px-6 py-6 text-base"
+              >
+                Learn Now
+              </Button>
+            </Link>
+            <Button
+              variant="outline"
+              className="border-gray-300 text-[#666] px-6 py-6 text-base
+                   bg-transparent"
+            >
+              Teach Now
+            </Button>
+          </div>
+        </div>
+      </section>
 
-      {/* TRUE AGENT Initiative */}
-      <section ref={section3Ref} className="py-20 bg-[#FF924D]/10">
+      {/* TRUE AGENT Initiative  At OIKY */}
+      <section ref={section3Ref} className="py-30 bg-[#FF924D]/10 ">
         <div className="max-w-6xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -328,7 +449,7 @@ const HomeDiscription = () => {
       </section>
 
       {/* Blog */}
-      <section ref={section4Ref}>
+      <section ref={section4Ref} className="pt-14">
         <Blog />
       </section>
 
