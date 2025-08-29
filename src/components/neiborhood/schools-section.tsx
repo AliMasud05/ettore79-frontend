@@ -3,20 +3,7 @@ import { Star } from "lucide-react";
 export function SchoolsSection() {
   const schoolTypes = ["Preschool", "Elementary", "Middle", "High"];
 
-  const schools = [
-    {
-      name: "Gardner Elementary School",
-      type: "Elementary",
-      rating: 10,
-      students: 244,
-      grades: "K-5",
-      isPublic: true,
-      district: "San Jose Unified School District",
-      parentRating: 4.5,
-      greatSchoolRating: 10,
-    },
-    // Repeat for other schools...
-  ];
+ 
 
   return (
     <div className="mb-12">
