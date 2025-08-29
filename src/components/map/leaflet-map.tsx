@@ -337,22 +337,20 @@ export function ExploreArea() {
   const [location, setLocation] = useState("cafe");
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 relative z-30">
-      <h2 className="text-2xl font-bold mb-6">Explore the Area</h2>
+    <div className=" mx-auto   py-8 relative z-30">
 
       {/* Filter Bar */}
-      <div className="md:flex items-center bg-white rounded-lg p-2 gap-2 relative z-40 border border-gray-200 flex-wrap">
-        <div className="md:w-32 w-full border border-gray-100 md:border-0">
+      <div className="md:flex items-center bg-white rounded-lg p-2 gap-2 relative z-40  flex-wrap">
+        <div className=" w-full ">
           <Select value={activeCategory} onValueChange={setActiveCategory} />
         </div>
-        <div className="h-6 border-l border-gray-300 hidden md:block" />
         <div className="flex-1 border border-gray-100 md:border-0">
           <div className="flex gap-2 flex-wrap">
             {locations.map((loc) => (
               <button
                 key={loc.value}
                 onClick={() => setLocation(loc.value)}
-                className={`px-4 py-2 rounded-lg text-sm font-medium ${
+                className={`px-4 py-2 rounded-lg text-base font-medium ${
                   location === loc.value
                     ? "bg-blue-500 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
