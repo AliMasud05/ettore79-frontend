@@ -1,7 +1,8 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"; // Ensure this is imported
-import { ChevronDown, Heart, Menu } from "lucide-react";
+import { Heart, Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { LanguageSwitcher } from "../GoogleTranslateProvider";
 import { Button } from "../ui/button";
 
 const Navbar = () => {
@@ -25,7 +26,10 @@ const Navbar = () => {
             <Link href="/buy" className="text-gray-700 hover:text-gray-900">
               Buy
             </Link>
-            <Link href="/property-listing" className="text-gray-700 hover:text-gray-900">
+            <Link
+              href="/property-listing"
+              className="text-gray-700 hover:text-gray-900"
+            >
               Property Listing
             </Link>
             <Link href="/agent" className="text-gray-700 hover:text-gray-900">
@@ -64,9 +68,10 @@ const Navbar = () => {
                 Sign Up
               </Button>
             </Link>
-            <div className="flex items-center space-x-1 text-gray-700">
-              <span>English</span>
-              <ChevronDown className="w-4 h-4" />
+            <div className="p-6 border-t border-gray-200">
+              <button className="text-sm font-medium text-gray-600 hover:text-black transition-colors">
+                <LanguageSwitcher />
+              </button>
             </div>
           </div>
 
@@ -160,9 +165,10 @@ const Navbar = () => {
                     {/* <Button className="bg-orange-500 hover:bg-orange-600 text-white w-full">
                       Sign Up
                     </Button> */}
-                    <div className="flex items-center justify-between p-2">
-                      <span className="text-gray-700">English</span>
-                      <ChevronDown className="w-4 h-4 text-gray-700" />
+                    <div className="p-6 border-t border-gray-200">
+                      <button className="text-sm font-medium text-gray-600 hover:text-black transition-colors">
+                        <LanguageSwitcher />
+                      </button>
                     </div>
                   </div>
                 </div>
