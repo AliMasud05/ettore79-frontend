@@ -1,209 +1,12 @@
 "use client";
 import { Input } from "@/components/ui/input";
-import agent1 from "@/assets/agent/Image (10).png";
-import agent2 from "@/assets/agent/Image (11).png";
-import agent3 from "@/assets/agent/Image (8).png";
 import { Search } from "lucide-react";
 import AgentCard from "@/components/card/agent-card";
 import { useState } from "react";
 import Image from "next/image";
-import agentImage from "@/assets/agent/Frame 1610068574.png";
 import { Button } from "@/components/ui/button";
-
-// JSON data for agents with category field
-const agentData = [
-  // Residential agents
-  {
-    name: "Olivia Rhye",
-    company: "Americorp Real Estate",
-    rating: 4.9,
-    reviewCount: 127,
-    priceRangeMin: "$13K",
-    priceRangeMax: "$3.8M",
-    salesCount: 526,
-    imageUrl: agent1.src,
-    category: "residential",
-  },
-  {
-    name: "Michael Stone",
-    company: "Urban Living Realty",
-    rating: 4.7,
-    reviewCount: 89,
-    priceRangeMin: "$50K",
-    priceRangeMax: "$2.5M",
-    salesCount: 342,
-    imageUrl: agent2.src,
-    category: "residential",
-  },
-  {
-    name: "Sarah Johnson",
-    company: "Hometown Properties",
-    rating: 4.8,
-    reviewCount: 156,
-    priceRangeMin: "$80K",
-    priceRangeMax: "$1.2M",
-    salesCount: 278,
-    imageUrl: agent3.src,
-    category: "residential",
-  },
-  {
-    name: "David Chen",
-    company: "Metro Real Estate Group",
-    rating: 4.9,
-    reviewCount: 203,
-    priceRangeMin: "$100K",
-    priceRangeMax: "$4.2M",
-    salesCount: 612,
-    imageUrl: agent1.src,
-    category: "residential",
-  },
-  {
-    name: "Emily Wilson",
-    company: "Coastal Living Realty",
-    rating: 4.6,
-    reviewCount: 72,
-    priceRangeMin: "$75K",
-    priceRangeMax: "$2.8M",
-    salesCount: 189,
-    imageUrl: agent2.src,
-    category: "residential",
-  },
-  {
-    name: "Robert Garcia",
-    company: "Summit Properties",
-    rating: 4.8,
-    reviewCount: 134,
-    priceRangeMin: "$60K",
-    priceRangeMax: "$3.1M",
-    salesCount: 421,
-    imageUrl: agent3.src,
-    category: "residential",
-  },
-  // Commercial agents
-  {
-    name: "James Peterson",
-    company: "Corporate Real Estate Solutions",
-    rating: 4.7,
-    reviewCount: 98,
-    priceRangeMin: "$250K",
-    priceRangeMax: "$15M",
-    salesCount: 287,
-    imageUrl: agent1.src,
-    category: "commercial",
-  },
-  {
-    name: "Jennifer Lee",
-    company: "Metropolitan Commercial",
-    rating: 4.9,
-    reviewCount: 156,
-    priceRangeMin: "$500K",
-    priceRangeMax: "$25M",
-    salesCount: 412,
-    imageUrl: agent2.src,
-    category: "commercial",
-  },
-  {
-    name: "Thomas Wright",
-    company: "Global Properties Inc.",
-    rating: 4.8,
-    reviewCount: 112,
-    priceRangeMin: "$1M",
-    priceRangeMax: "$50M",
-    salesCount: 198,
-    imageUrl: agent3.src,
-    category: "commercial",
-  },
-  {
-    name: "Lisa Martinez",
-    company: "Urban Commercial Group",
-    rating: 4.6,
-    reviewCount: 87,
-    priceRangeMin: "$300K",
-    priceRangeMax: "$18M",
-    salesCount: 156,
-    imageUrl: agent1.src,
-    category: "commercial",
-  },
-  // Luxury agents
-  {
-    name: "Alexander Dupont",
-    company: "Luxury Estates Worldwide",
-    rating: 4.9,
-    reviewCount: 201,
-    priceRangeMin: "$2M",
-    priceRangeMax: "$75M",
-    salesCount: 178,
-    imageUrl: agent2.src,
-    category: "luxury",
-  },
-  {
-    name: "Sophia Laurent",
-    company: "Prestige Properties",
-    rating: 4.9,
-    reviewCount: 245,
-    priceRangeMin: "$1.5M",
-    priceRangeMax: "$100M",
-    salesCount: 321,
-    imageUrl: agent3.src,
-    category: "luxury",
-  },
-  {
-    name: "Henry Vanderbilt",
-    company: "Elite Realty Group",
-    rating: 4.8,
-    reviewCount: 176,
-    priceRangeMin: "$3M",
-    priceRangeMax: "$65M",
-    salesCount: 254,
-    imageUrl: agent1.src,
-    category: "luxury",
-  },
-  // Rental agents
-  {
-    name: "Emma Thompson",
-    company: "Urban Rentals LLC",
-    rating: 4.7,
-    reviewCount: 143,
-    priceRangeMin: "$800",
-    priceRangeMax: "$15K",
-    salesCount: 412,
-    imageUrl: agent2.src,
-    category: "rental",
-  },
-  {
-    name: "Daniel Kim",
-    company: "Metro Rental Specialists",
-    rating: 4.6,
-    reviewCount: 98,
-    priceRangeMin: "$1K",
-    priceRangeMax: "$12K",
-    salesCount: 287,
-    imageUrl: agent3.src,
-    category: "rental",
-  },
-  {
-    name: "Rachel Adams",
-    company: "City Living Rentals",
-    rating: 4.8,
-    reviewCount: 167,
-    priceRangeMin: "$1.2K",
-    priceRangeMax: "$10K",
-    salesCount: 389,
-    imageUrl: agent1.src,
-    category: "rental",
-  },
-  {
-    name: "Kevin Brown",
-    company: "Premier Rental Properties",
-    rating: 4.7,
-    reviewCount: 112,
-    priceRangeMin: "$900",
-    priceRangeMax: "$8K",
-    salesCount: 256,
-    imageUrl: agent2.src,
-    category: "rental",
-  },
-];
+import agentImage from "@/assets/agent/Frame 1610068574.png";
+import { useGetUserByRoleQuery } from "@/redux/api/authApi";
 
 const categories = [
   { id: "all", label: "All Agents" },
@@ -217,7 +20,36 @@ export default function AgentsPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredAgents = agentData.filter((agent) => {
+  // Fetch agents using the useGetUserByRoleQuery hook
+  const {
+    data: agentResponse,
+    isLoading,
+    isError,
+  } = useGetUserByRoleQuery("AGENT");
+
+  // Map API data to the format expected by AgentCard
+  const agents =
+    agentResponse?.data?.map((agent) => ({
+      id: agent.id,
+      name: agent.name,
+      company: agent.company || "N/A", // Fallback if company is null
+      rating: 4.7, // Placeholder as API doesn't provide rating
+      reviewCount: 0, // Placeholder as API doesn't provide review count
+      priceRangeMin: agent.minLoanAmount || "N/A", // Using minLoanAmount as a placeholder
+      priceRangeMax: agent.maxLoanAmount || "N/A", // Using maxLoanAmount as a placeholder
+      salesCount: 0, // Placeholder as API doesn't provide sales count
+      imageUrl:
+        agent.profileImage ||
+        "/placeholder.svg?height=280&width=320&query=professional", // Fallback image
+      category: agent.specialities
+        ? agent.specialities.toLowerCase()
+        : "residential", // Map specialities to category, default to residential
+      experience: agent.experience || "N/A",
+      fbLink: agent.fbLink || null,
+      linkedInLink: agent.linkedInLink || null,
+    })) || [];
+
+  const filteredAgents = agents.filter((agent) => {
     const matchesCategory =
       activeCategory === "all" || agent.category === activeCategory;
     const matchesSearch =
@@ -237,12 +69,12 @@ export default function AgentsPage() {
 
       <div className="flex flex-col md:flex-row gap-6 mb-8">
         {/* Custom Tabs */}
-        <div className="flex flex-wrap border rounded-sm border-gray-300 overflow-hidden ">
+        <div className="flex flex-wrap border rounded-sm border-gray-300 overflow-hidden">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-4 py-3 border-r-1  text-base font-medium transition-colors
+              className={`px-4 py-3 border-r-1 text-base font-medium transition-colors
                 ${
                   activeCategory === category.id
                     ? "bg-[#F4EEEB] text-blue-600 border-blue-300"
@@ -274,24 +106,38 @@ export default function AgentsPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-6">
         <div
           className="
-        col-span-1 md:col-span-2 lg:col-span-3 
-
-        grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6"
+            col-span-1 md:col-span-2 lg:col-span-3
+            grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {filteredAgents.length > 0 ? (
-            filteredAgents.slice(0, 6).map((agent, index) => (
-              <AgentCard
-                key={index}
-                name={agent.name}
-                company={agent.company}
-                rating={agent.rating}
-                reviewCount={agent.reviewCount}
-                priceRangeMin={agent.priceRangeMin}
-                priceRangeMax={agent.priceRangeMax}
-                salesCount={agent.salesCount}
-                imageUrl={agent.imageUrl}
-              />
-            ))
+          {isLoading ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-gray-500 text-lg">Loading agents...</p>
+            </div>
+          ) : isError ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-red-500 text-lg">
+                Error fetching agents. Please try again later.
+              </p>
+            </div>
+          ) : filteredAgents.length > 0 ? (
+            filteredAgents
+              .slice(0, 6)
+              .map((agent) => (
+                <AgentCard
+                  key={agent.id}
+                  name={agent.name}
+                  company={agent.company}
+                  rating={agent.rating}
+                  reviewCount={agent.reviewCount}
+                  priceRangeMin={agent.priceRangeMin}
+                  priceRangeMax={agent.priceRangeMax}
+                  salesCount={agent.salesCount}
+                  imageUrl={agent.imageUrl}
+                  experience={agent.experience}
+                  fbLink={agent.fbLink}
+                  linkedInLink={agent.linkedInLink}
+                />
+              ))
           ) : (
             <div className="col-span-full text-center py-12">
               <p className="text-gray-500 text-lg">
@@ -302,12 +148,12 @@ export default function AgentsPage() {
         </div>
         <div className="col-span-1">{/* space for advertisements */}</div>
       </div>
-      <div className=" my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 rounded-xl bg-white">
+      <div className="my-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 xl:grid-cols-6 rounded-xl bg-white">
         <div className="bg-[#FFE9DB] col-span-1 md:col-span-4 flex justify-center items-center flex-col gap-4">
-          <h2 className="text-[#3012F0] secondary-font font-bold text-4xl md:text-5xl ">
+          <h2 className="text-[#3012F0] secondary-font font-bold text-4xl md:text-5xl">
             What is True Agent?
           </h2>
-          <Button className="bg-[#3012F0] py-5  hover:bg-orange-600 text-white">
+          <Button className="bg-[#3012F0] py-5 hover:bg-orange-600 text-white">
             Know More
           </Button>
         </div>

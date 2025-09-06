@@ -39,9 +39,9 @@ const baseQueryWithAuth: ReturnType<typeof fetchBaseQuery> = async (
   ) {
     api.dispatch(logout());
     // Redirect to login page
-    if (typeof window !== "undefined") {
-      window.location.href = "/login";
-    }
+    // if (typeof window !== "undefined") {
+    //   window.location.href = "/login";
+    // }
   }
 
   return result;
@@ -50,7 +50,7 @@ const baseQueryWithAuth: ReturnType<typeof fetchBaseQuery> = async (
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithAuth,
-  tagTypes: ["User"],
+  tagTypes: ["User", "Contact", "Blog", "Package"],
   endpoints: (builder) => ({}),
 });
 

@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 interface BlogCardProps {
+  id: string;
   title: string;
   description: string;
   imageUrl: string;
@@ -11,6 +12,7 @@ interface BlogCardProps {
 }
 
 export default function BlogCard({
+  id,
   title,
   description,
   imageUrl,
@@ -18,8 +20,8 @@ export default function BlogCard({
   date,
 }: BlogCardProps) {
   return (
-    <Link href="/blog/[slug]" as={`/blog/${title.toLowerCase().replace(/\s+/g, "-")}`}>
-      <div className="group">
+    <Link href={`/blog/${id}`}>
+      <div className="group border border-[#E5E7EB]/40 rounded-lg p-4 transition-colors hover:border-purple-600">
         <div className="relative mb-4">
           <Image
             src={imageUrl || "/placeholder.svg"}
@@ -32,19 +34,13 @@ export default function BlogCard({
 
         <div className="flex flex-col gap-1">
           <h3 className="text-xl font-normal text-[#3012F0] mb-2 group-hover:text-purple-600 flex items-center">
-            <Link
-              href={`/blog/${title.toLowerCase().replace(/\s+/g, "-")}`}
-              className="flex-1"
-            >
+            <Link href={`/blog/${id}`} className="flex-1">
               {title}
             </Link>
             <ArrowUpRight color="black" strokeWidth={2.25} />
           </h3>
 
-          <p
-            className="text-base 
-        mb-4 line-clamp-2 leading-6 font-medium text-[#535862]"
-          >
+          <p className="text-base mb-4 line-clamp-2 leading-6 font-medium text-[#535862]">
             {description}
           </p>
 

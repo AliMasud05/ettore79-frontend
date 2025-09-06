@@ -1,20 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"; // Required for GSAP animations to work in Next.js
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { Eye } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useLoginMutation } from "@/redux/api/authApi"; // Adjust path to your API slice
+import { toast } from "sonner"; // For notifications
 import house_img from "@/assets/login/Image.png";
 import logo from "@/assets/logo.png";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+  const [login, { isLoading }] = useLoginMutation();
+  const router = useRouter();
 
   useEffect(() => {
     // Initialize animations
@@ -71,6 +86,64 @@ export default function LoginPage() {
     return () => ctx.revert(); // Cleanup
   }, []);
 
+  // Form validation
+  const validateForm = () => {
+    const newErrors = {
+      email: "",
+      password: "",
+    };
+    let isValid = true;
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+      isValid = false;
+    }
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+      isValid = false;
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    try {
+      const response = await login({
+        email: formData.email,
+        password: formData.password,
+      }).unwrap();
+
+      if (response.success) {
+        // Store token in localStorage or your preferred storage
+        localStorage.setItem("authToken", response.data.token);
+        toast.success("Login successful! Redirecting...");
+        setTimeout(() => router.push("/"), 2000); // Adjust redirect path as needed
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Login failed. Please check your credentials."
+      );
+    }
+  };
+
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
   return (
     <div className="container mx-auto h-screen" ref={containerRef}>
       <div className="grid grid-cols-1 md:grid-cols-8 gap-10 h-full">
@@ -104,7 +177,7 @@ export default function LoginPage() {
               </div>
 
               {/* Form */}
-              <form className="space-y-5 w-full">
+              <form className="space-y-5 w-full" onSubmit={handleSubmit}>
                 {/* Email Field */}
                 <div className="form-element">
                   <label
@@ -116,9 +189,15 @@ export default function LoginPage() {
                   <Input
                     type="email"
                     id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="john.watson@example.com"
                     className="w-full rounded-3xl py-6 px-5 placeholder:text-base border-gray-300 focus-visible:ring-[#3012F0]"
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
 
                 {/* Password Field */}
@@ -131,18 +210,31 @@ export default function LoginPage() {
                   </label>
                   <div className="relative">
                     <Input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       id="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
                       placeholder="••••••••••"
                       className="w-full rounded-3xl py-6 px-5 placeholder:text-base border-gray-300 focus-visible:ring-[#3012F0]"
                     />
                     <button
                       type="button"
+                      onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                     >
-                      <Eye className="h-5 w-5" />
+                      {showPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
                     </button>
                   </div>
+                  {errors.password && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.password}
+                    </p>
+                  )}
                 </div>
 
                 {/* Remember Me & Forgot Password */}
@@ -164,12 +256,13 @@ export default function LoginPage() {
                   </Link>
                 </div>
 
-                {/* Sign In Button - Updated with better visibility */}
+                {/* Sign In Button */}
                 <Button
                   className="w-full py-6 rounded-3xl mt-2 border-2 border-[#FF914C] bg-[#FF914C] hover:border-[#1a0b99] hover:bg-[#1a0b99] text-white text-base font-medium sign-in-btn form-element hover:text-white transition-colors duration-300"
                   type="submit"
+                  disabled={isLoading}
                 >
-                  Sign In
+                  {isLoading ? "Signing In..." : "Sign In"}
                 </Button>
               </form>
 

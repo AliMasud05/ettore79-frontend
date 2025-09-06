@@ -1,20 +1,41 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"; // Required for GSAP animations to work in Next.js
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { Eye } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import { toast } from "sonner"; // For notifications
 import house_img from "@/assets/login/Image.png";
 import logo from "@/assets/logo.png";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useRegisterMutation } from "@/redux/api/authApi";
 
 export default function SignUpPage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+    role: "",
+  });
+  const [errors, setErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phoneNumber: "",
+    role: "",
+  });
+  const [register, { isLoading }] = useRegisterMutation();
+  const router = useRouter();
 
   useEffect(() => {
     // Initialize animations
@@ -57,8 +78,8 @@ export default function SignUpPage() {
         });
       }
 
-      // Subtle pulse animation for the sign-in button
-      gsap.to(".sign-in-btn", {
+      // Subtle pulse animation for the sign-up button
+      gsap.to(".sign-up-btn", {
         scale: 1.02,
         duration: 1.5,
         repeat: -1,
@@ -71,6 +92,82 @@ export default function SignUpPage() {
     return () => ctx.revert(); // Cleanup
   }, []);
 
+  // Form validation
+  const validateForm = () => {
+    const newErrors = {
+      name: "",
+      email: "",
+      password: "",
+      phoneNumber: "",
+      role: "",
+    };
+    let isValid = true;
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Full name is required";
+      isValid = false;
+    }
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+      isValid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Invalid email format";
+      isValid = false;
+    }
+    if (!formData.password) {
+      newErrors.password = "Password is required";
+      isValid = false;
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+      isValid = false;
+    }
+    if (!formData.phoneNumber.trim()) {
+      newErrors.phoneNumber = "Phone number is required";
+      isValid = false;
+    }
+    if (!formData.role) {
+      newErrors.role = "Please select a role";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!validateForm()) return;
+
+    try {
+      const response = await register({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        phoneNumber: formData.phoneNumber,
+        role: formData.role,
+      }).unwrap();
+
+      if (response.success) {
+        toast.success("Registration successful! Redirecting to sign-in...");
+        setTimeout(() => router.push("/signin"), 2000);
+      }
+    } catch (error: any) {
+      toast.error(
+        error?.data?.message || "Registration failed. Please try again."
+      );
+    }
+  };
+
+  // Handle input changes
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: "" }));
+  };
+
   return (
     <div className="container mx-auto h-screen" ref={containerRef}>
       <div className="grid grid-cols-1 md:grid-cols-8 gap-10 h-full">
@@ -79,16 +176,16 @@ export default function SignUpPage() {
           <div className="flex flex-col justify-start gap-2 max-w-xl w-full px-4">
             {/* Logo */}
             <div className="logo-animation">
-               <Link href="/">
-              <Image
-                src={logo.src}
-                alt="Company logo"
-                width={216}
-                height={40}
-                className="h-auto w-54"
-                priority
+              <Link href="/">
+                <Image
+                  src={logo.src}
+                  alt="Company logo"
+                  width={216}
+                  height={40}
+                  className="h-auto w-54"
+                  priority
                 />
-                </Link>
+              </Link>
             </div>
 
             {/* Form Container */}
@@ -99,12 +196,12 @@ export default function SignUpPage() {
                   Sign Up
                 </h1>
                 <p className="text-base font-normal leading-6 text-gray-600">
-                  Please enter the information to create an account.{" "}
+                  Please enter the information to create an account.
                 </p>
               </div>
 
               {/* Form */}
-              <form className="space-y-4 w-full">
+              <form className="space-y-4 w-full" onSubmit={handleSubmit}>
                 {/* Role Selection */}
                 <div className="form-element">
                   <label
@@ -115,15 +212,24 @@ export default function SignUpPage() {
                   </label>
                   <select
                     id="role"
+                    name="role"
+                    value={formData.role}
+                    onChange={handleInputChange}
                     className="w-full rounded-3xl py-4 px-5 text-base border-1 border-gray-300 focus-visible:ring-[#3012F0] focus:border-[#3012F0] bg-white"
                   >
                     <option value="">Select your role</option>
-                    <option value="Agent">Agent</option>
-                    <option value="Landlord">Landlord</option>
-                    <option value="Buyer">Buyer</option>
-                    <option value="Professional">Professional</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="BUYER">Buyer</option>
+                    <option value="SELLER">Seller</option>
+                    <option value="AGENT">Agent</option>
+                    <option value="BROKER">Broker</option>
+                    <option value="LANDLORD">Landlord</option>
                   </select>
+                  {errors.role && (
+                    <p className="text-red-500 text-sm mt-1">{errors.role}</p>
+                  )}
                 </div>
+
                 {/* Name Field */}
                 <div className="form-element">
                   <label
@@ -135,9 +241,15 @@ export default function SignUpPage() {
                   <Input
                     type="text"
                     id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
                     placeholder="John Watson"
                     className="w-full rounded-3xl py-6 px-5 placeholder:text-base border-gray-300 focus-visible:ring-[#3012F0]"
                   />
+                  {errors.name && (
+                    <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                  )}
                 </div>
 
                 {/* Email Field */}
@@ -151,25 +263,39 @@ export default function SignUpPage() {
                   <Input
                     type="email"
                     id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     placeholder="john.watson@example.com"
                     className="w-full rounded-3xl py-6 px-5 placeholder:text-base border-gray-300 focus-visible:ring-[#3012F0]"
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
 
                 {/* Mobile Number Field */}
                 <div className="form-element">
                   <label
-                    htmlFor="mobile"
+                    htmlFor="phoneNumber"
                     className="block text-base font-medium text-gray-700 mb-2 ml-1"
                   >
                     Mobile Number
                   </label>
                   <Input
                     type="tel"
-                    id="mobile"
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleInputChange}
                     placeholder="+1 234 567 890"
                     className="w-full rounded-3xl py-6 px-5 placeholder:text-base border-gray-300 focus-visible:ring-[#3012F0]"
                   />
+                  {errors.phoneNumber && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.phoneNumber}
+                    </p>
+                  )}
                 </div>
 
                 {/* Password Field */}
@@ -182,18 +308,31 @@ export default function SignUpPage() {
                   </label>
                   <div className="relative">
                     <Input
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       id="password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleInputChange}
                       placeholder="••••••••••"
                       className="w-full rounded-3xl py-6 px-5 placeholder:text-base border-gray-300 focus-visible:ring-[#3012F0]"
                     />
                     <button
                       type="button"
+                      onClick={() => setShowPassword(!showPassword)}
                       className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                     >
-                      <Eye className="h-5 w-5" />
+                      {showPassword ? (
+                        <EyeOff className="h-5 w-5" />
+                      ) : (
+                        <Eye className="h-5 w-5" />
+                      )}
                     </button>
                   </div>
+                  {errors.password && (
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.password}
+                    </p>
+                  )}
                 </div>
 
                 {/* Remember Me & Forgot Password */}
@@ -215,51 +354,17 @@ export default function SignUpPage() {
                   </Link>
                 </div>
 
-                {/* Sign In Button */}
+                {/* Sign Up Button */}
                 <Button
-                  className="w-full py-6 rounded-3xl mt-2 border-2 border-[#FF914C] bg-[#FF914C] hover:border-[#1a0b99] hover:bg-[#1a0b99] text-white text-base font-medium sign-in-btn form-element hover:text-white transition-colors duration-300"
+                  className="w-full py-6 rounded-3xl mt-2 border-2 border-[#FF914C] bg-[#FF914C] hover:border-[#1a0b99] hover:bg-[#1a0b99] text-white text-base font-medium sign-up-btn form-element hover:text-white transition-colors duration-300"
                   type="submit"
+                  disabled={isLoading}
                 >
-                  Sign In
+                  {isLoading ? "Signing Up..." : "Sign Up"}
                 </Button>
               </form>
 
-              {/* Divider */}
-              {/* <div className="flex items-center my-6 form-element">
-                <div className="flex-grow border-t border-gray-300"></div>
-                <span className="mx-4 text-sm text-gray-500">OR</span>
-                <div className="flex-grow border-t border-gray-300"></div>
-              </div> */}
-
-              {/* Social Login */}
-              {/* <div className="form-element">
-                <Button
-                  variant="outline"
-                  className="w-full py-6 text-base rounded-3xl border-gray-300 hover:bg-gray-50 transition-colors"
-                >
-                  <svg className="h-5 w-5 mr-3" viewBox="0 0 22 22" fill="none">
-                    <path
-                      d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                      fill="#4285F4"
-                    />
-                    <path
-                      d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                      fill="#34A853"
-                    />
-                    <path
-                      d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                      fill="#FBBC05"
-                    />
-                    <path
-                      d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                      fill="#EA4335"
-                    />
-                  </svg>
-                  Continue with Google
-                </Button>
-              </div> */}
-
-              {/* Sign Up Link */}
+              {/* Sign In Link */}
               <div className="text-center mt-6 form-element">
                 <p className="text-sm text-gray-600">
                   Already have an account?{" "}

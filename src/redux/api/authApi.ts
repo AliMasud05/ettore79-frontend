@@ -77,6 +77,14 @@ export const authApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["User"],
     }),
+    //get user by role
+    getUserByRole: builder.query({
+      query: (role) => ({
+        url: `/users/user-role?role=${role}`,
+        method: "GET",
+      }),
+      providesTags: ["User"],
+    }),
   }),
 });
 
@@ -91,4 +99,5 @@ export const {
   useChangePasswordMutation,
   useGetMeQuery,
   useUpdateUserMutation,
+  useGetUserByRoleQuery,
 } = authApi;
